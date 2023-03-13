@@ -1,22 +1,31 @@
+// import DummyImg from '../images/loginLogo.png'
+import CreateImg from '../images/create.svg'
+import ReactForm from '../components/Form'
+
 export default function InputPage() {
   return (
     <>
-      <div class="h-screen bg-stone-300 relative w-screen flex justify-center items-center">
-        <div className="flex flex-col bg-stone-200 gap-5 w-2/3 h-full">
-           <div class="flex flex-col justify-start w-2/3 gap-2">
-            <p class="text-stone-900 text-4xl text-start justify-self-start">Add New Product Form</p>
-            <p class="text-start">Please fill all the requirement below.</p>
+      <div class="h-screen bg-stone-300 relative w-screen flex justify-center items-center bg-opacity-20">
+        <div class="flex p-10 relative rounded-md shadow-md bg-stone-200">
+          <button class="absolute top-0 right-0 m-5">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <div class="flex flex-col gap-5 w-auto h-3/4 justify-center ">
+            <div class="flex flex-col justify-start w-2/3 gap-2">
+              <p class="text-stone-900 text-4xl text-start justify-self-start whitespace-nowrap ">Add New Product Form</p>
+              <p class="text-start whitespace-nowrap">Please fill all the requirement below.</p>
             </div>
-            <form action="" class="flex flex-col w-60 gap-5 mx-5">
-              <input type="text" class="px-3 py-2 shadow-md rounded-md"  placeholder="Name" />
-              <input type="text" class="px-3 py-2 shadow-md rounded-md"  placeholder="Price" />
-              <input type="text" class="px-3 py-2 shadow-md rounded-md"  placeholder="ImageUrl" />
-              <select name="" class="px-3 py-2 shadow-md rounded-md"  >
-                <option value="category1">Category 1</option>
-                <option value="category2">Category 2</option>
-              </select>
-              <button type="submit" class="py-1 mt-2 w-full rounded-3xl text-lg hover:bg-green-800 bg-green-900 text-white">Add New Product</button>
-            </form>
+            <div class="flex w-full gap-5 mx-5">
+              <ReactForm />
+            </div>
+          </div>
+          <div>
+            <div class="flex h-full w-full items-end px-5 mr-7">
+              <img class="h-60" src={CreateImg} />
+            </div>
+          </div>
         </div>
       </div>
     </>

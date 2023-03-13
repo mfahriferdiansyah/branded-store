@@ -5,6 +5,7 @@ import InputPage from './pages/InputPage'
 function App() {
   return (
     <div className="App">
+      <InputPage />
       <LoginPage />
     </div>
   );
