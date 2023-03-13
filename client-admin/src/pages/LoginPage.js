@@ -19,7 +19,7 @@ export default function LoginPage() {
             </form>
           </div>
           <div class="flex h-full w-full p-5 mr-7">
-            <img src={loginLogo} class="shadow-xl rounded-md bg-stone-400"  />
+            <img src={loginLogo} alt="" class="shadow-xl rounded-md bg-stone-400"  />
           </div>
         </div>
       </div>
