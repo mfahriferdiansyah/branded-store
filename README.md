@@ -1,8 +1,8 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=10471235&assignment_repo_type=AssignmentRepo)
 # P3-Challenge-1
 
-- Tema Aplikasi: ...
-- CSS Framework: ...
+- Tema Aplikasi: Brand Showcase
+- CSS Framework: Tailwind
 
 Struktur Folder:
 
@@ -14,7 +14,7 @@ Struktur Folder:
 
 Target:
 
-- [ ] Lecture - React Intro
+- [x] Lecture - React Intro
 - [ ] React: Class Component vs Function Component
 - [ ] Mempelajari State menggunakan useState
 - [ ] Mengirim Props baik berupa sebuah state atau function
@@ -25,12 +25,13 @@ Target:
 - [ ] Membuat server (json-server)
 - [ ] Membuat react app untuk client-user (Styling)
 - [ ] Membuat react app untuk client-admin (CRUD)
-- [ ] Menentukan Thema Aplikasi
-- [ ] Menentukan Design dan pemilihan CSS Framework
+- [x] Menentukan Thema Aplikasi
+- [x] Menentukan Design dan pemilihan CSS Framework
 
 **Report:**
 
-...
+> Pada lecture hari ini saya mempelajari dasar dari library javascript yaitu react menggunakan create-react-app, penggunaan dasar dari hooks, state, props (state/function), dan event handling.
+> Progress challange pada sore ini, saya sedang mengerjakan client-admin dimana sampai pada tahap login-page. Untuk selanjutnya akan mengerjakan dashboard, serta form product, untuk kemudian saya selesaikan sampai client-user sebelum lecture esok hari.
 
 > contoh: Hari ini saya belajar React Component. Saya memahami bagaimana cara React bekerja. Lifecycle yang sudah saya coba adalah componentDidMount yang digunakan untuk fetch data dst. Namun saya belum mencoba menggunakan onSubmit dikarenakan data yang didapat belum sesuai.
 > Pada tugas ini, saya memilih Tema A dengan mengambil referensi dari B. Saya juga akan menggunakan CSS Framework yaitu Tailwind CSS
