@@ -8,8 +8,8 @@ function App() {
       <header>
         <Navbar />
       </header>
-        {/* <HomePage /> */}
-        <DetailPage />
+        <HomePage />
+        {/* <DetailPage /> */}
     </div>
   );
 }

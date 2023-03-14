@@ -43,7 +43,7 @@ export default function DetailPage() {
 
   return (
     <>
-      <div className="font-serif relative h-[calc(100vh-8vh)] w-screen flex justify-center items-end">
+      <div className="font-serif relative h-[calc(100vh-8vh)] w-screen flex justify-center items-end text-stone-700">
         <div className="container h-full p-10">
           <div className="flex gap-20 w-full">
             {/* Card Image */}
