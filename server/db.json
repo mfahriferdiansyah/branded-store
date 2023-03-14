@@ -1,0 +1,66 @@
+{ 
+  "categories": [
+    {
+      "id": 1,
+      "name": "Shoes"
+    },
+    {
+      "id": 2,
+      "name": "Hat"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Black Sneaker",
+      "slug": "black-sneaker",
+      "description": "arcu dui vivamus arcu felis bibendum ut tristique et egestas quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci",
+      "price": 399,
+      "mainImg": "https://www.armani.com/variants/images/1647597300969327/F/w1280.jpg",
+      "categoryId": 1,
+      "authorId": 1
+    },
+    {
+      "id": 2,
+      "name": "Hat EA7",
+      "slug": "hat-ea7",
+      "description": "Recycled-fabric baseball cap. Its adjustable, ergonomic cut provides maximum freedom of movement and is embellished with a contrasting logo.",
+      "price": 75,
+      "mainImg": "https://www.armani.com/variants/images/1647597300921633/F/w1280.jpg",
+      "categoryId": 2,
+      "authorId": 1
+    }
+  ],
+  "images": [
+    {
+      "id": 1,
+      "productId": 1,
+      "imgUrl": "https://www.armani.com/variants/images/1647597300969327/D/w1280.jpg"
+    },
+    {
+      "id": 2,
+      "productId": 1,
+      "imgUrl": "https://www.armani.com/variants/images/1647597300969327/E/w1280.jpg"
+    },
+    {
+      "id": 3,
+      "productId": 1,
+      "imgUrl": "https://www.armani.com/variants/images/1647597300969327/A/w1280.jpg"
+    },
+    {
+      "id": 4,
+      "productId": 2,
+      "imgUrl": "https://www.armani.com/variants/images/1647597300921633/D/w1280.jpg"
+    },
+    {
+      "id": 5,
+      "productId": 2,
+      "imgUrl": "https://www.armani.com/variants/images/1647597300921631/D/w1280.jpg"
+    },
+    {
+      "id": 6,
+      "productId": 2,
+      "imgUrl": "https://www.armani.com/variants/images/1647597300921631/F/w1280.jpg"
+    }
+  ]
+}

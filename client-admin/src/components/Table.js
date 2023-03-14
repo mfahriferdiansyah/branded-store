@@ -1,6 +1,28 @@
 import TableRow from './TableRow'
+import {useState, useEffect} from 'react'
 
 export default function Table() {
+
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+    fetch("http://localhost:4000/products")
+    .then(response => {
+      if(!response.ok) {
+        throw new Error ("Something went wrong")
+      }
+      return response.json()
+    })
+    .then(data => {
+      console.log(data)
+      let newProducts = [...data]
+      setProducts(data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }, [])
+
   return (
     <>
       <table className="text-2xl w-full">
@@ -13,7 +35,9 @@ export default function Table() {
           </tr>
         </thead>
         <tbody>
-          <TableRow />
+          {
+            products.map((el, index) => <TableRow key={el.id} index={++index} data={el} />)
+          }
         </tbody>
       </table>
     </>
