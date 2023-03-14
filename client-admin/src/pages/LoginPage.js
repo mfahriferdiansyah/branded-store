@@ -1,6 +1,24 @@
+import {useState, useEffect} from 'react'
 import loginLogo from '../images/loginLogo.png'
 
 export default function LoginPage() {
+
+  const [credential, setCredential] = useState({})
+
+  function checkCredential(e) {
+    let {value, name} = e.target
+    const newCredential = {
+      ...credential,
+      [name]: value
+    }
+    setCredential(newCredential)
+  }
+
+  function loginHandler(e) {
+    e.preventDefault()
+    console.log('Login dengan ->>', credential)
+  }
+
   return (
     <>
       <div className="h-screen bg-stone-200 relative w-screen flex justify-center items-center">
@@ -10,10 +28,10 @@ export default function LoginPage() {
             <p className="text-stone-900 text-4xl text-start justify-self-start">Login</p>
             <p className="text-start">Welcome, please login first.</p>
             </div>
-            <form action="" className="flex flex-col gap-5 w-2/3">
+            <form action=""  onSubmit={loginHandler} className="flex flex-col gap-5 w-2/3">
               <div className="justify-center flex flex-col gap-3">
-              <input type="text" name="loginEmail" className="px-3 py-2 shadow-md rounded-md" placeholder="Email" />
-              <input type="text" name="loginPassword" className="px-3 py-2 shadow-md rounded-md" placeholder="Password" />
+              <input onChange={checkCredential} type="email" name="loginEmail" className="px-3 py-2 shadow-md rounded-md" placeholder="Email" required/>
+              <input onChange={checkCredential} type="password" name="loginPassword" className="px-3 py-2 shadow-md rounded-md" placeholder="Password" required />
               <button type="submit" className="py-1 mt-3 w-full rounded-3xl text-lg hover:bg-green-800 bg-green-900 text-white">Login</button>
               </div>
             </form>
