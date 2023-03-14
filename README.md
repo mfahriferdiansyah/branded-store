@@ -18,7 +18,7 @@ Target:
 - [x] React: Class Component vs Function Component
 - [x] Mempelajari State menggunakan useState
 - [x] Mengirim Props baik berupa sebuah state atau function
-- [ ] Event Handling (onClick, onChange, onSubmit)
+- [x] Event Handling (onClick, onChange, onSubmit)
 - [ ] Conditional Rendering di dalam React
 - [x] Looping List of Data di dalam React
 - [x] Lifecycle component menggunakan useEffect
@@ -44,15 +44,17 @@ Target:
 Target:
 
 - [ ] Lecture - Custom Hooks
-- [ ] Rules of Hooks
-- [ ] Lecture - React-Router
-- [ ] Membuat router user-side (min: home, detail)
+- [x] Rules of Hooks
+- [x] Lecture - React-Router
+- [x] Membuat router user-side (min: home, detail)
 - [ ] Membuat router admin-side (min: login, add admin, CRUD main entitas, CRUD another entitas)
 - [ ] Membuat privateRoute untuk admin
 
 **Report:**
 
-...
+> Hari ini dijelaskan terkait tentang custom hooks, dan react router. PENTING, selalu gunakan hooks pada top level. Pada react router, bisa menggunakan hooks useNavigate untuk berpindah page, dan redirect bila digunakan pada selain top level. Untuk mendapatkan params bisa menggunakan useParams. proteksi router dilakukan seperti halnya pada vue, menggunakan validasi localstorage terkait access token untuk kemudian di redirect.
+
+> Progress tugas sore ini sampai di 03-router, jika sudah selesai akan meneruskan ke bagian reuse form input untuk edit, dan reuse form login untuk membuat page menambahkan admin baru.
 
 ## W1D3
 
