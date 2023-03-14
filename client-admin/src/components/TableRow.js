@@ -13,7 +13,7 @@ export default function TableRow({index, data}) {
             </div>
           </div>
         </td>
-        <td className="basis-3/12 whitespace-nowrap"> {price.toLocaleString("en-US", {style:"currency", currency:"USD"})}</td>
+        <td className="basis-3/12 whitespace-nowrap"> {price?.toLocaleString("en-US", {style:"currency", currency:"USD"})}</td>
         <td className="basis-1/12">
           <div className="flex gap-5 justify-start items-end">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">

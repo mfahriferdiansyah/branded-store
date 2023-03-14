@@ -1,13 +1,19 @@
-// import DummyImg from '../images/loginLogo.png'
 import CreateImg from '../images/create.svg'
 import ReactForm from '../components/Form'
+import { useNavigate } from "react-router-dom";
 
 export default function InputPage() {
+  const navigate = useNavigate()
+  const closeForm = (e) => {
+    e.preventDefault()
+    console.log('Close form')
+    navigate(-1)
+  }
   return (
     <>
       <div className="h-screen bg-stone-300 relative w-screen flex justify-center items-center bg-opacity-20">
         <div className="flex p-10 relative rounded-md shadow-md bg-stone-200">
-          <button className="absolute top-0 right-0 m-5">
+          <button onClick={closeForm} className="absolute top-0 right-0 m-5">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>

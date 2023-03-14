@@ -1,26 +1,19 @@
 import TableRow from './TableRow'
 import {useState, useEffect} from 'react'
+import {fetchGet} from '../helpers/fetch'
 
 export default function Table() {
 
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    fetch("http://localhost:4000/products")
-    .then(response => {
-      if(!response.ok) {
-        throw new Error ("Something went wrong")
-      }
-      return response.json()
-    })
-    .then(data => {
-      console.log(data)
-      let newProducts = [...data]
-      setProducts(data)
-    })
-    .catch(err => {
-      console.log(err)
-    })
+    async function fetchData() {
+      const response = await fetchGet('products')
+      console.log(response)
+      let newProducts = [...response]
+      setProducts(newProducts)
+    }
+      fetchData()
   }, [])
 
   return (
