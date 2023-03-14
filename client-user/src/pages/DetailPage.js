@@ -64,7 +64,7 @@ export default function DetailPage() {
                 {/* Title */}
                 <div className="">{product.name}</div>
                 {/* Price */}
-                <div className="font-mono text-stone-700  text-3xl">{product.price.toLocaleString("en-US", {style:"currency", currency:"USD"})}</div>
+                <div className="font-mono text-stone-700  text-3xl">{product.price?product.price.toLocaleString("en-US", {style:"currency", currency:"USD"}):product.price}</div>
                 {/* Description */}
                 <div className="text-stone-400 text-xl">{product.description}</div>
               <div>
