@@ -25,7 +25,7 @@ export default function Table() {
 
   return (
     <>
-      <table className="text-2xl w-full">
+      <table className="text-2xl w-full h-full overflow-y-scroll">
         <thead className="border-b-2 border-green-700">
           <tr className="flex px-5 text-green-800 justify-start text-start font-mono">
             <td className="basis-1/12">No.</td>
