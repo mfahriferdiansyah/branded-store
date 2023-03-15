@@ -18,11 +18,11 @@ export default function ProductCard({data}) {
               </div>
               {/* Price */}
               <div className="font-mono ">
-                {price.toLocaleString("en-US", {style:"currency", currency:"USD"})}
+                {price?.toLocaleString("en-US", {style:"currency", currency:"USD"})}
               </div>
             </div>
             <div className="w-full flex justify-center px-5">
-              <Button text="Detail" />
+              <Button text="Detail" path={'/product/'+id} />
             </div>
           </div>
         </div>

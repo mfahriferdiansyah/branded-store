@@ -1,6 +1,8 @@
 import CreateImg from '../images/create.svg'
 import ReactForm from '../components/Form'
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from 'react'
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { fetchGet } from '../helpers/fetch';
 
 export default function InputPage() {
   const navigate = useNavigate()
@@ -9,6 +11,15 @@ export default function InputPage() {
     console.log('Close form')
     navigate(-1)
   }
+
+  let [searchParams] = useSearchParams();
+  const [isEdit, setIsEdit] = useState(false)
+  useEffect(() => {
+    if(searchParams.get('productId')) {
+      setIsEdit(true)
+    }
+  }, [])
+
   return (
     <>
       <div className="h-screen bg-stone-300 relative w-screen flex justify-center items-center bg-opacity-20">
@@ -20,7 +31,11 @@ export default function InputPage() {
           </button>
           <div className="flex flex-col gap-5 w-auto h-3/4 justify-center ">
             <div className="flex flex-col justify-start w-2/3 gap-2">
-              <p className="text-stone-900 text-4xl text-start justify-self-start whitespace-nowrap ">Add New Product Form</p>
+              <p className="text-stone-900 text-4xl text-start justify-self-start whitespace-nowrap ">
+                {
+                  isEdit ? 'Edit Product Form' : 'Add New Product Form'
+                }
+              </p>
               <p className="text-start whitespace-nowrap">Please fill all the requirement below.</p>
             </div>
             <div className="flex w-full gap-5 mx-5">

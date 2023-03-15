@@ -1,17 +1,14 @@
-import './App.css';
-import LoginPage from './pages/LoginPage'
-import InputPage from './pages/InputPage'
-import HomePage from './pages/HomePage'
-import Navbar from './components/Navbar'
+import {RouterProvider} from "react-router-dom";
+import router from "./routes";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <>
-    {/* <Navbar /> */}
     <div className="App">
-        <HomePage />
-        {/* <InputPage /> */}
-        {/* <LoginPage /> */}
+      <RouterProvider router={router} />
+      <ToastContainer />
     </div>
     </>
   );
