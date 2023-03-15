@@ -1,21 +1,8 @@
 import TableRow from './TableRow'
-import {useState, useEffect} from 'react'
-import {fetchGet} from '../helpers/fetch'
+import { useSelector } from 'react-redux'
 
 export default function Table() {
-
-  const [products, setProducts] = useState([])
-
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetchGet('products')
-      console.log(response)
-      let newProducts = [...response]
-      setProducts(newProducts)
-    }
-      fetchData()
-  }, [])
-
+  const products = useSelector((state) => state.productList)
   return (
     <>
       <table className="text-2xl w-full h-full overflow-y-scroll">
@@ -29,7 +16,7 @@ export default function Table() {
         </thead>
         <tbody>
           {
-            products.map((el, index) => <TableRow key={el.id} index={++index} data={el} />)
+            products?.map((el, index) => <TableRow key={el.id} index={++index} data={el} />)
           }
         </tbody>
       </table>

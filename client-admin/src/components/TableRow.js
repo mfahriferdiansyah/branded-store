@@ -7,13 +7,11 @@ export default function TableRow({index, data}) {
   let {id, name, price, slug, description, mainImg, categoryId, authorId} = data
 
   async function deleteHandler(e) {
-    console.log(id);
     const response = await fetchDelete('products/'+id)
     console.log(response)
   }
 
   async function editHandler(e){
-    console.log(id)
     navigate('/input-page?productId='+id)
   }
 

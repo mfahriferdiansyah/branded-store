@@ -3,21 +3,63 @@ import ReactForm from '../components/Form'
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { fetchGet } from '../helpers/fetch';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function InputPage() {
   const navigate = useNavigate()
   const closeForm = (e) => {
     e.preventDefault()
-    console.log('Close form')
     navigate(-1)
   }
 
-  let [searchParams] = useSearchParams();
-  const [isEdit, setIsEdit] = useState(false)
+  const isEdit = useSelector((state) => state.isEdit)
+  const dispatch = useDispatch()
+  const [searchParams] = useSearchParams()
+
   useEffect(() => {
-    if(searchParams.get('productId')) {
-      setIsEdit(true)
+    const productId = searchParams.get('productId')
+
+    const fetchImages = async () => {
+      const response = await fetchGet(`images?productId=${productId}`)
+      const action = {
+        type: 'editImg/fetchSuccess',
+        payload: response
+      }
+      dispatch(action)
     }
+
+    const fetchProduct = async () => {
+      const response = await fetchGet(`products?id=${productId}`)
+      const action = {
+        type: 'editProduct/fetchSuccess',
+        payload: response[0]
+      }
+      dispatch(action)
+    }
+
+    const resetEdit = () => {
+      const action = {
+        type: 'resetEdit'
+      }
+      dispatch(action)
+    }
+
+    let payload;
+    if(productId) {
+      payload = true
+      resetEdit()
+      fetchProduct()
+      fetchImages()
+    }
+    else {
+      payload = false
+      resetEdit()
+    }
+    const action = {
+      type: 'isEdit/assign',
+      payload
+    }
+    dispatch(action)
   }, [])
 
   return (
