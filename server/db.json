@@ -31,13 +31,13 @@
       "authorId": 1
     },
     {
-      "name": "Sniper yahoo",
-      "price": 2,
-      "mainImg": "https://www.armani.com/variants/images/1647597300969327/F/w1280.jpg",
-      "description": "Ini deskripsi",
-      "categoryId": 1,
+      "name": "www",
+      "price": 222,
+      "mainImg": "www",
+      "description": "ww",
+      "categoryId": null,
       "authorId": 1,
-      "slug": "Sniper yahoo",
+      "slug": "www",
       "id": 3
     }
   ],
@@ -73,12 +73,12 @@
       "imgUrl": "https://www.armani.com/variants/images/1647597300921631/F/w1280.jpg"
     },
     {
-      "imgUrl": "https://www.armani.com/variants/images/1647597300969327/F/w1280.jpg",
+      "imgUrl": "ww",
       "productId": 3,
       "id": 7
     },
     {
-      "imgUrl": "https://www.armani.com/variants/images/1647597300969327/F/w1280.jpg",
+      "imgUrl": "ww",
       "productId": 3,
       "id": 8
     }

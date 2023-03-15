@@ -16,34 +16,34 @@ export default function InputPage() {
   const dispatch = useDispatch()
   const [searchParams] = useSearchParams()
 
+  const productId = searchParams.get('productId')
+
+  const fetchImages = async () => {
+    const response = await fetchGet(`images?productId=${productId}`)
+    const action = {
+      type: 'editImg/fetchSuccess',
+      payload: response
+    }
+    dispatch(action)
+  }
+
+  const fetchProduct = async () => {
+    const response = await fetchGet(`products?id=${productId}`)
+    const action = {
+      type: 'editProduct/fetchSuccess',
+      payload: response[0]
+    }
+    dispatch(action)
+  }
+
+  const resetEdit = () => {
+    const action = {
+      type: 'resetEdit'
+    }
+    dispatch(action)
+  }
+
   useEffect(() => {
-    const productId = searchParams.get('productId')
-
-    const fetchImages = async () => {
-      const response = await fetchGet(`images?productId=${productId}`)
-      const action = {
-        type: 'editImg/fetchSuccess',
-        payload: response
-      }
-      dispatch(action)
-    }
-
-    const fetchProduct = async () => {
-      const response = await fetchGet(`products?id=${productId}`)
-      const action = {
-        type: 'editProduct/fetchSuccess',
-        payload: response[0]
-      }
-      dispatch(action)
-    }
-
-    const resetEdit = () => {
-      const action = {
-        type: 'resetEdit'
-      }
-      dispatch(action)
-    }
-
     let payload;
     if(productId) {
       payload = true

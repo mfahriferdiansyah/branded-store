@@ -5,21 +5,24 @@ import {useDispatch, useSelector} from 'react-redux'
 
 export default function HomePage() {
   const dispatch = useDispatch()
+
+  const fetchProduct = async () => {
+    const response = await fetchGet('products')
+    const action = {
+      type: 'product/fetchSuccess',
+      payload: response
+    }
+    dispatch(action)
+  }
+  
   const resetEdit = () => {
     const action = {
       type: 'resetEdit'
     }
     dispatch(action)
   }
+
   useEffect(() => {
-    const fetchProduct = async () => {
-      const response = await fetchGet('products')
-      const action = {
-        type: 'product/fetchSuccess',
-        payload: response
-      }
-      dispatch(action)
-    }
     resetEdit()
     fetchProduct()
   }, [])
