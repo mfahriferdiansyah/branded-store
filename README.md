@@ -19,7 +19,7 @@ Target:
 - [x] Mempelajari State menggunakan useState
 - [x] Mengirim Props baik berupa sebuah state atau function
 - [x] Event Handling (onClick, onChange, onSubmit)
-- [ ] Conditional Rendering di dalam React
+- [x] Conditional Rendering di dalam React
 - [x] Looping List of Data di dalam React
 - [x] Lifecycle component menggunakan useEffect
 - [x] Membuat server (json-server)
@@ -43,7 +43,7 @@ Target:
 
 Target:
 
-- [ ] Lecture - Custom Hooks
+- [x] Lecture - Custom Hooks
 - [x] Rules of Hooks
 - [x] Lecture - React-Router
 - [x] Membuat router user-side (min: home, detail)
@@ -60,19 +60,21 @@ Target:
 
 Target:
 
-- [ ] Lecture - Redux
-- [ ] State vs Global State
-- [ ] Bagaimana cara membuat Store
-- [ ] Bagaimana cara membuat Reducer
-- [ ] Bagaimana cara membuat Action
+- [x] Lecture - Redux
+- [x] State vs Global State
+- [x] Bagaimana cara membuat Store
+- [x] Bagaimana cara membuat Reducer
+- [x] Bagaimana cara membuat Action
 - [ ] Membuat Action Creators
 - [ ] Membuat Action Types
-- [ ] Lecture - Redux-thunk (handle async)
+- [x] Lecture - Redux-thunk (handle async)
 - [ ] Cara menggunakan combineReducers
 
 **Report:**
 
-...
+> Mempelajari penggunaan redux, dan binding dengan react. Terdapat hooks pada redux, diantaranya useSelector yang kurang lebih berfungsi seperti getter, dan useDispatch sebagai setter. Penggunaan middleware untuk proteksi dan handle async. Reducer berisi kumpulan action pure function. Seperti assign hasil fetch kedalam state, ataupun assign state biasa. Default pada switch reducer bersifat seperti getter karena mereturn state. Jadi wajib ada.
+
+> Progress malam ini sampai pada 04 redux pada sisi admin, pada home, form product, dan auto populate data saat edit.
 
 ## W1D4
 
