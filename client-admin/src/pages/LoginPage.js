@@ -1,10 +1,12 @@
 import {useState, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
 import loginLogo from '../images/loginLogo.png'
 
 export default function LoginPage() {
 
   const [credential, setCredential] = useState({})
-
+  const navigate = useNavigate()
+  
   function checkCredential(e) {
     let {value, name} = e.target
     const newCredential = {
@@ -16,7 +18,10 @@ export default function LoginPage() {
 
   function loginHandler(e) {
     e.preventDefault()
+    localStorage.access_token = 'iniAksesToken'
     console.log('Login dengan ->>', credential)
+    console.log(localStorage.getItem('access_token'))
+    navigate('/')
   }
 
   return (

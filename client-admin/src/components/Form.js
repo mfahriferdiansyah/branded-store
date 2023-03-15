@@ -1,9 +1,10 @@
 import {useState, useEffect} from 'react'
+import {useNavigate} from 'react-router-dom'
 import {fetchPost} from '../helpers/fetch'
 
 export default function ReactForm () {
   const [productForm, setProductForm] = useState({})
-  
+  const navigate = useNavigate()
   function checkForm(e) {
     e.preventDefault()
     let {name, value} = e.target
@@ -32,6 +33,7 @@ export default function ReactForm () {
       }
     }
     setProductForm({})
+    navigate(-1)
   }
 
   return (
@@ -46,8 +48,8 @@ export default function ReactForm () {
       </div>
       <input onChange={checkForm} type="text" name='description' className="px-3 py-2 shadow-md rounded-md" placeholder="Description" required/>
       <select onChange={checkForm} name="categoryId" className="px-3 py-2 shadow-md rounded-md" required >
-        <option value="category1">Category 1</option>
-        <option value="category2">Category 2</option>
+        <option value="1">Category 1</option>
+        <option value="2">Category 2</option>
       </select>
       <button type="submit" className="py-1 mt-2 w-full rounded-3xl text-lg hover:bg-green-800 bg-green-900 text-white">Add New Product</button>
     </form>
