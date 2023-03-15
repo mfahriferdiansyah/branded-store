@@ -11,6 +11,16 @@
   ],
   "products": [
     {
+      "id": 1,
+      "name": "Black Sneaker",
+      "slug": "black-sneaker",
+      "description": "arcu dui vivamus arcu felis bibendum ut tristique et egestas quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci",
+      "price": 399,
+      "mainImg": "https://www.armani.com/variants/images/1647597300969327/F/w1280.jpg",
+      "categoryId": 1,
+      "authorId": 1
+    },
+    {
       "id": 2,
       "name": "Hat EA7",
       "slug": "hat-ea7",
@@ -19,76 +29,6 @@
       "mainImg": "https://www.armani.com/variants/images/1647597300921633/F/w1280.jpg",
       "categoryId": 2,
       "authorId": 1
-    },
-    {
-      "name": "Leather Sneakers",
-      "price": 400,
-      "mainImg": "https://www.armani.com/variants/images/17266703523686548/F/w480.jpg",
-      "img2": "https://www.armani.com/variants/images/17266703523686548/D/w480.jpg",
-      "img3": "https://www.armani.com/variants/images/17266703523686548/E/w480.jpg",
-      "description": "Sneakers are no longer just for sports. These sneakers can be worn just as easily as urban and casual wear as they can in moments where you need a sports chic outfit.",
-      "id": 3
-    },
-    {
-      "name": "Nubuck Sneakers",
-      "price": 440,
-      "mainImg": "https://www.armani.com/variants/images/20346390236404503/F/w480.jpg",
-      "img2": "https://www.armani.com/variants/images/20346390236404503/D/w480.jpg",
-      "img3": "https://www.armani.com/variants/images/20346390236404503/E/w480.jpg",
-      "description": "Sneakers are no longer just for sports. These sneakers can be worn just as easily as urban and casual wear as they can in moments where you need a sports chic outfit.",
-      "id": 4
-    },
-    {
-      "mainImg": "https://www.armani.com/variants/images/1647597302237778/F/w480.jpg",
-      "img2": "https://www.armani.com/variants/images/1647597302237778/D/w480.jpg",
-      "img3": "https://www.armani.com/variants/images/1647597302237778/L/w480.jpg",
-      "name": "Cloche Hat",
-      "price": 165,
-      "description": "Nylon cloche hat with all-over decorative collection print and logo patch. The item is from a fun-inspired collection made of comfortable",
-      "categoryId": "category2",
-      "id": 5
-    },
-    {
-      "name": "sss",
-      "mainImg": "ss",
-      "img2": "ss",
-      "price": 111,
-      "img3": "sss",
-      "description": "sss",
-      "id": 6
-    },
-    {
-      "name": "222",
-      "price": 222,
-      "mainImg": "22",
-      "img2": "22",
-      "img3": "22",
-      "description": "22",
-      "categoryId": 2,
-      "slug": "222",
-      "id": 7
-    },
-    {
-      "name": "asdasd",
-      "price": 21313,
-      "mainImg": "ada",
-      "img2": "121",
-      "img3": "121",
-      "description": "1212",
-      "categoryId": 2,
-      "slug": "asdasd",
-      "id": 8
-    },
-    {
-      "name": "1231",
-      "price": 123,
-      "mainImg": "123",
-      "img2": "1231",
-      "img3": "123",
-      "description": "121",
-      "categoryId": null,
-      "slug": "1231",
-      "id": 9
     }
   ],
   "images": [
@@ -121,132 +61,6 @@
       "id": 6,
       "productId": 2,
       "imgUrl": "https://www.armani.com/variants/images/1647597300921631/F/w1280.jpg"
-    },
-    {
-      "imgUrl": "https://www.armani.com/variants/images/17266703523686548/D/w480.jpg",
-      "productId": 3,
-      "id": 7
-    },
-    {
-      "imgUrl": "https://www.armani.com/variants/images/17266703523686548/D/w480.jpg",
-      "productId": 3,
-      "id": 8
-    },
-    {
-      "imgUrl": "https://www.armani.com/variants/images/20346390236404503/D/w480.jpg",
-      "productId": 4,
-      "id": 9
-    },
-    {
-      "imgUrl": "https://www.armani.com/variants/images/20346390236404503/D/w480.jpg",
-      "productId": 4,
-      "id": 10
-    },
-    {
-      "imgUrl": "https://www.armani.com/variants/images/1647597302237778/D/w480.jpg",
-      "productId": 5,
-      "id": 11
-    },
-    {
-      "imgUrl": "https://www.armani.com/variants/images/1647597302237778/D/w480.jpg",
-      "productId": 5,
-      "id": 12
-    },
-    {
-      "imgUrl": "ss",
-      "productId": 6,
-      "price": null,
-      "id": 13
-    },
-    {
-      "imgUrl": "ss",
-      "productId": 6,
-      "price": null,
-      "id": 14
-    },
-    {
-      "imgUrl": "ww",
-      "productId": 7,
-      "price": null,
-      "categoryId": null,
-      "id": 15
-    },
-    {
-      "imgUrl": "ww",
-      "productId": 7,
-      "price": null,
-      "categoryId": null,
-      "id": 16
-    },
-    {
-      "imgUrl": "22",
-      "productId": 7,
-      "price": null,
-      "categoryId": null,
-      "id": 17
-    },
-    {
-      "imgUrl": "22",
-      "productId": 7,
-      "price": null,
-      "categoryId": null,
-      "id": 18
-    },
-    {
-      "imgUrl": "22",
-      "productId": 7,
-      "price": null,
-      "categoryId": null,
-      "id": 19
-    },
-    {
-      "imgUrl": "22",
-      "productId": 7,
-      "price": null,
-      "categoryId": null,
-      "id": 20
-    },
-    {
-      "imgUrl": "22",
-      "productId": 7,
-      "price": null,
-      "categoryId": null,
-      "id": 21
-    },
-    {
-      "imgUrl": "22",
-      "productId": 7,
-      "price": null,
-      "categoryId": null,
-      "id": 22
-    },
-    {
-      "imgUrl": "121",
-      "productId": 8,
-      "price": null,
-      "categoryId": null,
-      "id": 23
-    },
-    {
-      "imgUrl": "121",
-      "productId": 8,
-      "price": null,
-      "categoryId": null,
-      "id": 24
-    },
-    {
-      "imgUrl": "1231",
-      "productId": 9,
-      "price": null,
-      "categoryId": null,
-      "id": 25
-    },
-    {
-      "imgUrl": "1231",
-      "productId": 9,
-      "price": null,
-      "categoryId": null,
-      "id": 26
     }
   ]
 }

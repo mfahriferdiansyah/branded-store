@@ -27,7 +27,7 @@ export default function Navbar() {
         <div className="flex justify-center font-mono items-center text-start gap-20">
           <Link to="/" className="text-lg font-semibold text-center">Dashboard</Link>
           <Link  to="/input-page" className="text-lg font-semibold">Add Product</Link>
-          <Link  className="text-lg font-semibold">Register</Link>
+          <Link to="/register-page" className="text-lg font-semibold">Register</Link>
         </div>
         <div className="justify-center items-center flex w-20">
           {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" className="w-6 h-6 cursor-pointer stroke-green-900">
