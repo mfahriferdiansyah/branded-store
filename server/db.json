@@ -1,4 +1,16 @@
 {
+  "authors": [
+    {
+      "id": 1,
+      "email": "Shoes",
+      "password": "pppp"
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "test",
+      "id": 2
+    }
+  ],
   "categories": [
     {
       "id": 1,
@@ -29,16 +41,6 @@
       "mainImg": "https://www.armani.com/variants/images/1647597300921633/F/w1280.jpg",
       "categoryId": 2,
       "authorId": 1
-    },
-    {
-      "name": "www",
-      "price": 222,
-      "mainImg": "www",
-      "description": "ww",
-      "categoryId": null,
-      "authorId": 1,
-      "slug": "www",
-      "id": 3
     }
   ],
   "images": [
@@ -71,16 +73,6 @@
       "id": 6,
       "productId": 2,
       "imgUrl": "https://www.armani.com/variants/images/1647597300921631/F/w1280.jpg"
-    },
-    {
-      "imgUrl": "ww",
-      "productId": 3,
-      "id": 7
-    },
-    {
-      "imgUrl": "ww",
-      "productId": 3,
-      "id": 8
     }
   ]
 }

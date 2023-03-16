@@ -1,6 +1,6 @@
 import { legacy_createStore as createStore } from 'redux'
 
-const initialState = { productList: [], isEdit: false, editImg: [], editProduct: {} }
+const initialState = { productList: [], categoryList: [], isEdit: false, editImg: [], editProduct: {}, pathNow: '' }
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -10,10 +10,22 @@ function rootReducer(state = initialState, action) {
         productList: action.payload
       }
 
+    case 'category/fetchSuccess':
+      return {
+        ...state,
+        categoryList: action.payload
+      }
+
     case 'isEdit/assign':
       return {
         ...state,
         isEdit: action.payload
+      }
+
+    case 'pathNow/assign':
+      return {
+        ...state,
+        pathNow: action.payload
       }
 
     case 'editProduct/fetchSuccess':
@@ -34,7 +46,6 @@ function rootReducer(state = initialState, action) {
         editImg: [],
         editProduct: {}
       }
-
 
     default:
       return state

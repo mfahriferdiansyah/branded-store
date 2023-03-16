@@ -2,7 +2,7 @@ import {useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import { fetchDelete, fetchGet } from '../helpers/fetch'
 
-export default function TableRow({index, data}) {
+export default function TableRow({index, data, pathNow}) {
   const navigate = useNavigate()
   let {id, name, price, slug, description, mainImg, categoryId, authorId} = data
 
@@ -19,16 +19,22 @@ export default function TableRow({index, data}) {
     <>
       <tr className="flex px-5 py-3 font-mono">
         <td className="basis-1/12">{index}</td>
-        <td className="basis-7/12">
-          <div className="flex gap-5">
-            <img className="rounded-md  w-44" src={mainImg} alt={slug} />
-            <div className="flex flex-col gap-3">
-            <p>{name}</p>
-            <p className="text-lg">{description}</p>
-            </div>
-          </div>
-        </td>
-        <td className="basis-3/12 whitespace-nowrap"> {price?.toLocaleString("en-US", {style:"currency", currency:"USD"})}</td>
+        {
+          pathNow === '/' ?<>          
+            <td className="basis-7/12">
+              <div className="flex gap-5">
+                <img className="rounded-md  w-44" src={mainImg} alt={slug} />
+                <div className="flex flex-col gap-3">
+                <p>{name}</p>
+                <p className="text-lg">{description}</p>
+                </div>
+              </div>
+            </td>
+            <td className="basis-3/12 whitespace-nowrap"> {price?.toLocaleString("en-US", {style:"currency", currency:"USD"})}</td>
+          </> : <>
+            <td className="basis-10/12">{name}</td>
+          </>
+        }
         <td className="basis-1/12">
           <div className="flex gap-5 justify-start items-end">
             <button onClick={editHandler}>            
