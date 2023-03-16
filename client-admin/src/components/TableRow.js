@@ -1,36 +1,42 @@
-import {useState} from 'react'
-import {Link, useNavigate} from 'react-router-dom'
-import { fetchDelete, fetchGet } from '../helpers/fetch'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { deleteCategory, deleteProduct } from '../store/actions/actionCreator'
 
-export default function TableRow({index, data}) {
+export default function TableRow({index, data, pathNow}) {
   const navigate = useNavigate()
   let {id, name, price, slug, description, mainImg, categoryId, authorId} = data
-
+  
+  const dispatch = useDispatch()
   async function deleteHandler(e) {
-    console.log(id);
-    const response = await fetchDelete('products/'+id)
-    console.log(response)
+    if(pathNow === '/category-page') dispatch(deleteCategory(id))
+    else if(pathNow === '/') dispatch(deleteProduct(id))
   }
 
   async function editHandler(e){
-    console.log(id)
-    navigate('/input-page?productId='+id)
+    if(pathNow === '/category-page') navigate('/input-page/category?id='+id)
+    else if(pathNow === '/') navigate('/input-page?productId='+id)
   }
 
   return (
     <>
       <tr className="flex px-5 py-3 font-mono">
         <td className="basis-1/12">{index}</td>
-        <td className="basis-7/12">
-          <div className="flex gap-5">
-            <img className="rounded-md  w-44" src={mainImg} alt={slug} />
-            <div className="flex flex-col gap-3">
-            <p>{name}</p>
-            <p className="text-lg">{description}</p>
-            </div>
-          </div>
-        </td>
-        <td className="basis-3/12 whitespace-nowrap"> {price?.toLocaleString("en-US", {style:"currency", currency:"USD"})}</td>
+        {
+          pathNow === '/' ?<>          
+            <td className="basis-7/12">
+              <div className="flex gap-5">
+                <img className="rounded-md  w-44" src={mainImg} alt={slug} />
+                <div className="flex flex-col gap-3">
+                <p>{name}</p>
+                <p className="text-lg">{description}</p>
+                </div>
+              </div>
+            </td>
+            <td className="basis-3/12 whitespace-nowrap"> {price?.toLocaleString("en-US", {style:"currency", currency:"USD"})}</td>
+          </> : <>
+            <td className="basis-10/12">{name}</td>
+          </>
+        }
         <td className="basis-1/12">
           <div className="flex gap-5 justify-start items-end">
             <button onClick={editHandler}>            

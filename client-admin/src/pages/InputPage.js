@@ -1,23 +1,49 @@
 import CreateImg from '../images/create.svg'
-import ReactForm from '../components/Form'
-import { useEffect, useState } from 'react'
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { fetchGet } from '../helpers/fetch';
+import ProductForm from '../components/ProductForm'
+import RegisterForm from '../components/RegisterForm'
+import CategoryForm from '../components/CategoryForm'
+
+import { useEffect } from 'react'
+import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { getCategoryById, getImages, getProductById, resetEditData, setCategoryById, setImageList, setIsEdit, setPathNow, setProductById } from '../store/actions/actionCreator'
 
 export default function InputPage() {
   const navigate = useNavigate()
   const closeForm = (e) => {
     e.preventDefault()
-    console.log('Close form')
     navigate(-1)
   }
 
-  let [searchParams] = useSearchParams();
-  const [isEdit, setIsEdit] = useState(false)
+  const dispatch = useDispatch()
+  const [searchParams] = useSearchParams()
+  const location = useLocation()
+
+  const [pathNow, isEdit]= useSelector((state) => [state.general.pathNow, state.general.isEdit])
+
+  const productId = searchParams.get('productId')
+  const categoryId = searchParams.get('id')
+
   useEffect(() => {
-    if(searchParams.get('productId')) {
-      setIsEdit(true)
+    let payload;
+    dispatch(setPathNow(location.pathname))
+
+    if (productId) {
+      payload = true
+      dispatch(resetEditData())
+      dispatch(getProductById(productId))
+      dispatch(getImages(productId))
     }
+    else if (categoryId) {
+      payload = true
+      dispatch(getCategoryById(categoryId))
+    }
+    else {
+      payload = false
+      dispatch(resetEditData())
+    }
+
+    dispatch(setIsEdit(payload))
   }, [])
 
   return (
@@ -33,13 +59,19 @@ export default function InputPage() {
             <div className="flex flex-col justify-start w-2/3 gap-2">
               <p className="text-stone-900 text-4xl text-start justify-self-start whitespace-nowrap ">
                 {
-                  isEdit ? 'Edit Product Form' : 'Add New Product Form'
+                  pathNow === '/input-page' ? isEdit ? 'Edit Product' : 'Add New Product' :
+                    pathNow === '/input-page/category' ? isEdit ? 'Edit Category' : 'Add New Category' :
+                      pathNow === '/register-page' ? 'Register New Admin' : 'Form'
                 }
               </p>
               <p className="text-start whitespace-nowrap">Please fill all the requirement below.</p>
             </div>
             <div className="flex w-full gap-5 mx-5">
-              <ReactForm />
+              {
+                pathNow === '/input-page' ? <ProductForm /> :
+                  pathNow === '/register-page' ? <RegisterForm /> :
+                    pathNow === '/input-page/category' ? <CategoryForm /> : ''
+              }
             </div>
           </div>
           <div>

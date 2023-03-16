@@ -2,9 +2,6 @@ const baseUrl = 'http://localhost:4000/'
 
 async function fetchPost(endpoint, dataTarget) {
   try {
-    // dataTarget.price = parseFloat(dataTarget.price)
-    // dataTarget.categoryId = parseFloat(dataTarget.categoryId)
-    // dataTarget.slug = dataTarget.name
     const response = await fetch(baseUrl + endpoint, {
       method: 'POST',
       headers: {
@@ -51,9 +48,6 @@ async function fetchDelete(endpoint) {
 
 async function fetchPatch(endpoint, dataTarget){
   try {
-    // dataTarget.price = parseFloat(dataTarget.price)
-    // dataTarget.categoryId = parseFloat(dataTarget.categoryId)
-    dataTarget.slug = dataTarget.name
     const response = await fetch(baseUrl + endpoint, {
       method: 'PATCH',
       headers: {
