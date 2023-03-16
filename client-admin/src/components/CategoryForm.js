@@ -1,12 +1,18 @@
 import {useState, useEffect} from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {useNavigate, useSearchParams} from 'react-router-dom'
 import {fetchPost, fetchGet, fetchPatch} from '../helpers/fetch'
+import { patchCategory, postCategory } from '../store/actions/actionCreator'
 
 export default function ReactForm () {
-  
-  const [categoryForm, setCategoryForm] = useState({})
+  const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [categoryForm, setCategoryForm] = useState({})
+  const [searchParams] = useSearchParams()
+  const [isEdit, editCategory] = useSelector((state) => {
+    return [state.general.isEdit, state.categories.editCategory]
+  })
+  
   function checkForm(e) {
     e.preventDefault()
     let {name, value} = e.target
@@ -17,26 +23,17 @@ export default function ReactForm () {
     console.log(newInput)
     setCategoryForm(newInput)
   }
-
-  const isEdit = useSelector((state) => {
-    return state.general.isEdit
-  })
-
-  const editCategory = useSelector((state) => {
-    return state.categories.editCategory
-  })
-
-  const [searchParams] = useSearchParams()
-
+  
   async function formHandler(e) {
     e.preventDefault()
     let newCategory = {
       ...categoryForm
     }
-    
-    if(!isEdit) await fetchPost('categories', newCategory)
-    else await fetchPatch('categories/'+searchParams.get('id'), newCategory)
-
+    if(!isEdit) dispatch(postCategory(newCategory))
+    else dispatch(patchCategory({
+      id: searchParams.get('id'),
+      newCategory
+    }))
     setCategoryForm({})
     navigate(-1)
   }

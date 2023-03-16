@@ -1,12 +1,13 @@
 import {useState, useEffect} from 'react'
-import { useSelector } from 'react-redux'
-import {useNavigate, useSearchParams} from 'react-router-dom'
-import {fetchPost, fetchGet, fetchPatch} from '../helpers/fetch'
+import { useDispatch } from 'react-redux'
+import {useNavigate } from 'react-router-dom'
+import { postUser } from '../store/actions/actionCreator'
 
 export default function ReactForm () {
   
   const [registerForm, setRegisterForm] = useState({})
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   function checkForm(e) {
     e.preventDefault()
     let {name, value} = e.target
@@ -14,18 +15,12 @@ export default function ReactForm () {
       ...registerForm,
       [name]: value
     }
-    console.log(newInput)
     setRegisterForm(newInput)
   }
 
   async function formHandler(e) {
     e.preventDefault()
-    let newRegister = {
-      ...registerForm
-    }
-    
-    await fetchPost('authors', newRegister)
-    
+    dispatch(postUser({...registerForm}))
     setRegisterForm({})
     navigate(-1)
   }

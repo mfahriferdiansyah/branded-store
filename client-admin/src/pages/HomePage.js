@@ -1,35 +1,20 @@
 import Table from '../components/Table'
 import AddButton from '../components/AddButton'
 import { useEffect } from 'react'
-import { fetchGet } from '../helpers/fetch'
 import {useDispatch, useSelector} from 'react-redux'
-import { useLocation, Link } from 'react-router-dom'
-import { setCategoryList, setProductList, resetEditData, setPathNow } from '../store/actions/actionCreator'
+import { useLocation} from 'react-router-dom'
+import { resetEditData, setPathNow, getCategories, getProducts } from '../store/actions/actionCreator'
 
 export default function HomePage() {
   const dispatch = useDispatch()
   const location = useLocation()
   const pathNow = useSelector((state) => state.general.pathNow)
 
-  const fetchProduct = async () => {
-    const response = await fetchGet('products')
-    dispatch(setProductList(response))
-  }
-
-  const fetchCategory = async () => {
-    const response = await fetchGet('categories')
-    dispatch(setCategoryList(response))
-  }
-  
-  const resetEdit = () => {
-    dispatch(resetEditData())
-  }
-
   useEffect(() => {
     dispatch(setPathNow(location.pathname))
-    resetEdit()
-    fetchProduct()
-    fetchCategory()
+    dispatch(resetEditData())
+    dispatch(getProducts())
+    dispatch(getCategories())
   }, [location.pathname])
   
 

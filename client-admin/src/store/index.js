@@ -1,6 +1,7 @@
-import { legacy_createStore as createStore } from 'redux'
-import rootReducer from './reducers'
+import { applyMiddleware, legacy_createStore as createStore } from "redux";
+import thunk from "redux-thunk";
+import rootReducer from "./reducers";
 
-let store = createStore(rootReducer)
+let store = createStore(rootReducer, applyMiddleware(thunk));
 
-export default store
+export default store;

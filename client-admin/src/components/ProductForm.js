@@ -1,16 +1,17 @@
 import {useState, useEffect} from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {useNavigate, useSearchParams} from 'react-router-dom'
-import {fetchPost, fetchGet, fetchPatch} from '../helpers/fetch'
+import { patchProducts, postProducts } from '../store/actions/actionCreator'
 
 export default function ReactForm () {
-  
-  const [productForm, setProductForm] = useState({})
+  const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const [productForm, setProductForm] = useState({})
+
   function checkForm(e) {
     e.preventDefault()
     let {name, value} = e.target
-
     let newInput = {
       ...productForm,
       [name]: value
@@ -18,44 +19,24 @@ export default function ReactForm () {
     setProductForm(newInput)
   }
 
-  const isEdit = useSelector((state) => {
-    return state.general.isEdit
+  const [isEdit, editImg, editProduct] = useSelector((state) => {
+    return [state.general.isEdit, state.images.editImg, state.products.editProduct]
   })
-
-  const editImg = useSelector((state) => {
-    return state.images.editImg
-  })
-
-  const editProduct = useSelector((state) => {
-    return state.products.editProduct
-  })
-
-  const [searchParams] = useSearchParams()
 
   async function formHandler(e) {
     e.preventDefault()
-    let response 
-    let newProduct = {
-      ...productForm
-    }
-    let {name, price, mainImg, img2, img3, description, categoryId} = newProduct
+    let {name, price, mainImg, img2, img3, description, categoryId=1} = {...productForm}
     let slug = name.toLowerCase().split(' ').join('-')
     let productData = {name, price: parseFloat(price), mainImg, description, categoryId: parseFloat(categoryId), authorId:1, slug}
 
-    if(!isEdit) response = await fetchPost('products', productData)
-    else response = await fetchPatch('products/'+searchParams.get('productId'), productData)
+    if(!isEdit) dispatch(postProducts(productData, img2, img3))
+    else dispatch(patchProducts({
+      productData, img2, img3, 
+      imgId2: editImg[0].id, 
+      imgId3: editImg[1].id, 
+      productId: searchParams.get('productId')
+    }))
 
-    if(response.id) {
-      let productId = response.id
-        if(!isEdit) {
-          await fetchPost('images', {imgUrl: img2 || '', productId})
-          await fetchPost('images', {imgUrl: img3 || '', productId})
-        }
-        else {
-          await fetchPatch('images/'+editImg[0].id, {imgUrl: img2, productId}) 
-          await fetchPatch('images/'+editImg[1].id, {imgUrl: img3, productId}) 
-        }
-    }
     setProductForm({})
     navigate(-1)
   }
@@ -80,7 +61,7 @@ export default function ReactForm () {
       <input defaultValue={productForm?.img3} onChange={checkForm} type="text" name='img3' className="w-1/2 py-2 px-3 shadow-md rounded-md" placeholder="3rd Image"/>
       </div>
       <input defaultValue={productForm?.description} onChange={checkForm} type="text" name='description' className="px-3 py-2 shadow-md rounded-md" placeholder="Description" required/>
-      <select  defaultValue={productForm?.categoryId} onChange={checkForm} name="categoryId" className="px-3 py-2 shadow-md rounded-md" required >
+      <select  defaultValue={productForm?.categoryId || '1'} onChange={checkForm} name="categoryId" className="px-3 py-2 shadow-md rounded-md" required >
         <option value="1">Shoes</option>
         <option value="2">Hat</option>
       </select>

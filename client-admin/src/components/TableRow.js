@@ -1,15 +1,15 @@
-import {useState} from 'react'
-import {Link, useNavigate} from 'react-router-dom'
-import { fetchDelete, fetchGet } from '../helpers/fetch'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { deleteCategory, deleteProduct } from '../store/actions/actionCreator'
 
 export default function TableRow({index, data, pathNow}) {
   const navigate = useNavigate()
   let {id, name, price, slug, description, mainImg, categoryId, authorId} = data
-
+  
+  const dispatch = useDispatch()
   async function deleteHandler(e) {
-    console.log('masuk handler')
-    if(pathNow === '/category-page') await fetchDelete('categories/'+id)
-    else if(pathNow === '/') await fetchDelete('products/'+id)
+    if(pathNow === '/category-page') dispatch(deleteCategory(id))
+    else if(pathNow === '/') dispatch(deleteProduct(id))
   }
 
   async function editHandler(e){
