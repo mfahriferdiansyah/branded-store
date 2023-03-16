@@ -18,8 +18,6 @@ export default function ReactForm () {
     setRegisterForm(newInput)
   }
 
-  const [searchParams] = useSearchParams()
-
   async function formHandler(e) {
     e.preventDefault()
     let newRegister = {
@@ -33,7 +31,6 @@ export default function ReactForm () {
   }
 
   useEffect(() => {
-
   }, [])
 
   return (

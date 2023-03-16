@@ -7,12 +7,14 @@ export default function TableRow({index, data, pathNow}) {
   let {id, name, price, slug, description, mainImg, categoryId, authorId} = data
 
   async function deleteHandler(e) {
-    const response = await fetchDelete('products/'+id)
-    console.log(response)
+    console.log('masuk handler')
+    if(pathNow === '/category-page') await fetchDelete('categories/'+id)
+    else if(pathNow === '/') await fetchDelete('products/'+id)
   }
 
   async function editHandler(e){
-    navigate('/input-page?productId='+id)
+    if(pathNow === '/category-page') navigate('/input-page/category?id='+id)
+    else if(pathNow === '/') navigate('/input-page?productId='+id)
   }
 
   return (

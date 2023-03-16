@@ -9,6 +9,11 @@
       "email": "test@gmail.com",
       "password": "test",
       "id": 2
+    },
+    {
+      "email": "pepol@ppp.com",
+      "password": "12345678",
+      "id": 3
     }
   ],
   "categories": [

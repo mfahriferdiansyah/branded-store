@@ -4,8 +4,8 @@ import { useLocation } from 'react-router-dom'
 
 export default function Table({pathNow}) {
   let fetchedData = []
-  const productList = useSelector((state) => state.productList)
-  const categoryList = useSelector((state) => state.categoryList)
+  const productList = useSelector((state) => state.products.productList)
+  const categoryList = useSelector((state) => state.categories.categoryList)
   if(pathNow === '/') fetchedData = [...productList]
   if(pathNow === '/category-page') fetchedData = [...categoryList]
   return (

@@ -20,9 +20,7 @@ export default function Navbar() {
         </div>
         <div className="flex justify-center font-mono items-center text-start gap-20">
           <Link to="/" className="text-lg font-semibold text-center">Product</Link>
-          <Link  to="/input-page" className="text-lg font-semibold">Add Product</Link>
           <Link  to="/category-page" className="text-lg font-semibold">Categories</Link>
-          <Link  to="/input-page/category" className="text-lg font-semibold">Add Category</Link>
           <Link to="/register-page" className="text-lg font-semibold">Register</Link>
         </div>
         <div className="justify-center items-center flex w-20">

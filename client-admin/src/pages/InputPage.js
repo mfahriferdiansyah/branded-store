@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import { fetchGet } from '../helpers/fetch';
 import { useDispatch, useSelector } from 'react-redux';
+import { resetEditData, setCategoryById, setImageList, setIsEdit, setPathNow, setProductById } from '../store/actions/actionCreator'
 
 export default function InputPage() {
   const navigate = useNavigate()
@@ -15,49 +16,38 @@ export default function InputPage() {
     navigate(-1)
   }
 
-  const isEdit = useSelector((state) => state.isEdit)
+  const isEdit = useSelector((state) => state.general.isEdit)
   const dispatch = useDispatch()
   const [searchParams] = useSearchParams()
   const location = useLocation()
 
-  const pathNow = useSelector((state) => {
-    return state.pathNow
-  })
+  const pathNow = useSelector((state) => state.general.pathNow)
 
   const productId = searchParams.get('productId')
+  const categoryId = searchParams.get('id')
 
   const fetchImages = async () => {
     const response = await fetchGet(`images?productId=${productId}`)
-    const action = {
-      type: 'editImg/fetchSuccess',
-      payload: response
-    }
-    dispatch(action)
+    dispatch(setImageList(response))
   }
 
   const fetchProduct = async () => {
-    const response = await fetchGet(`products?id=${productId}`)
-    const action = {
-      type: 'editProduct/fetchSuccess',
-      payload: response[0]
-    }
-    dispatch(action)
+    const [response] = await fetchGet(`products?id=${productId}`)
+    dispatch(setProductById(response))
+  }
+
+  const fetchCategory = async () => {
+    const [response] = await fetchGet(`categories?id=${categoryId}`)
+    dispatch(setCategoryById(response))
   }
 
   const resetEdit = () => {
-    const action = {
-      type: 'resetEdit'
-    }
-    dispatch(action)
+    dispatch(resetEditData())
   }
 
   useEffect(() => {
-  let payload;
-  console.log(pathNow)
-  dispatch({
-    type: 'pathNow/assign',
-    payload: location.pathname
-  })
+    let payload;
+    dispatch(setPathNow(location.pathname))
 
     if(productId) {
       payload = true
@@ -65,15 +55,16 @@ export default function InputPage() {
       fetchProduct()
       fetchImages()
     }
+    else if(categoryId) {
+      payload = true
+      fetchCategory()
+    }
     else {
       payload = false
       resetEdit()
     }
-    const action = {
-      type: 'isEdit/assign',
-      payload
-    }
-    dispatch(action)
+
+    dispatch(setIsEdit(payload))
   }, [])
 
   return (

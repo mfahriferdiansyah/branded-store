@@ -18,6 +18,14 @@ export default function ReactForm () {
     setCategoryForm(newInput)
   }
 
+  const isEdit = useSelector((state) => {
+    return state.general.isEdit
+  })
+
+  const editCategory = useSelector((state) => {
+    return state.categories.editCategory
+  })
+
   const [searchParams] = useSearchParams()
 
   async function formHandler(e) {
@@ -26,23 +34,29 @@ export default function ReactForm () {
       ...categoryForm
     }
     
-    await fetchPost('authors', newCategory)
-    
+    if(!isEdit) await fetchPost('categories', newCategory)
+    else await fetchPatch('categories/'+searchParams.get('id'), newCategory)
+
     setCategoryForm({})
     navigate(-1)
   }
 
   useEffect(() => {
-
-  }, [])
+    if(isEdit) {
+      setCategoryForm({
+        ...editCategory
+      })
+    }
+  }, [editCategory])
 
   return (
   <>
     <form action="" onSubmit={formHandler} className="flex flex-col w-60 gap-5 mx-5">
-      <input onChange={checkForm} type="email" name='name' className="px-3 py-2 shadow-md rounded-md" placeholder="Category Name"  required/>
-      
+      <input defaultValue={categoryForm.name} onChange={checkForm} type="text" name='name' className="px-3 py-2 shadow-md rounded-md" placeholder="Category Name"  required/>
       <button type="submit" className="py-1 mt-2 w-full rounded-3xl text-lg hover:bg-green-800 bg-green-900 text-white">
-        Add new category
+      {
+        isEdit ? 'Edit Category' : 'Add New Category'
+      }
       </button>
     </form>
   </>

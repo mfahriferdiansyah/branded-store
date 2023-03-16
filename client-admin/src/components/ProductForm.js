@@ -19,15 +19,15 @@ export default function ReactForm () {
   }
 
   const isEdit = useSelector((state) => {
-    return state.isEdit
+    return state.general.isEdit
   })
 
   const editImg = useSelector((state) => {
-    return state.editImg
+    return state.images.editImg
   })
 
   const editProduct = useSelector((state) => {
-    return state.editProduct
+    return state.products.editProduct
   })
 
   const [searchParams] = useSearchParams()
@@ -61,10 +61,12 @@ export default function ReactForm () {
   }
 
   useEffect(() => {
-    setProductForm({
-      ...editProduct,
-      img2: editImg[0]?.imgUrl, img3: editImg[1]?.imgUrl
-    })
+    if(isEdit) {
+      setProductForm({
+        ...editProduct,
+        img2: editImg[0]?.imgUrl, img3: editImg[1]?.imgUrl
+      })
+    }
   }, [editProduct, editImg])
 
   return (

@@ -48,7 +48,6 @@ async function fetchDelete(endpoint) {
 
 async function fetchPatch(endpoint, dataTarget){
   try {
-    dataTarget.slug = dataTarget.name
     const response = await fetch(baseUrl + endpoint, {
       method: 'PATCH',
       headers: {
