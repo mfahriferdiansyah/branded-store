@@ -47,7 +47,7 @@ Target:
 - [x] Rules of Hooks
 - [x] Lecture - React-Router
 - [x] Membuat router user-side (min: home, detail)
-- [ ] Membuat router admin-side (min: login, add admin, CRUD main entitas, CRUD another entitas)
+- [x] Membuat router admin-side (min: login, add admin, CRUD main entitas, CRUD another entitas)
 - [ ] Membuat privateRoute untuk admin
 
 **Report:**
@@ -65,10 +65,10 @@ Target:
 - [x] Bagaimana cara membuat Store
 - [x] Bagaimana cara membuat Reducer
 - [x] Bagaimana cara membuat Action
-- [ ] Membuat Action Creators
-- [ ] Membuat Action Types
+- [x] Membuat Action Creators
+- [x] Membuat Action Types
 - [x] Lecture - Redux-thunk (handle async)
-- [ ] Cara menggunakan combineReducers
+- [x] Cara menggunakan combineReducers
 
 **Report:**
 
@@ -80,15 +80,17 @@ Target:
 
 Target:
 
-- [ ] Lecture - SQL Transaction
+- [x] Lecture - SQL Transaction
 - [ ] Membuat server mengguanakan express.js, postgreSQL dan Sequelize
 - [ ] Menentukan associations antar tables
-- [ ] Lecture - AWS EC2
+- [x] Lecture - AWS EC2
 - [ ] Membuat transaction saat membuat entitas baru pada main table. Pastikan ada assosiasi di dalamnya
 
 **Report:**
 
-...
+> Lecture hari ini belajar tentang dasar penggunaan transaction dan deployment. Transaction bertujuan agar ketika terjadi kesalahan dalam chain query bisa dilakukan rollback, sifat transaction isolated membuat data base utama tidak mendapatkan effect error ketika terjadi kesalahan. Error hanya terjadi pada scope transaction. Ketika ingin meneruskan hasil scope tersebut bisa menggunakan commit transaction, dan ketika ingin memulai bisa menggunakan begin, dan rollback ketika terjadi error atau keluar dari transaction.
+
+> Progress tugas sampai pada lecture middleware thunk, dan mulai masuk ke proses pembuatan server.
 
 ## W1D5
 
