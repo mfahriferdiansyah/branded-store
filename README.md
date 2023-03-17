@@ -96,9 +96,66 @@ Target:
 
 Target:
 
-- [ ] LC Simulation
+- [x] LC Simulation
 - [ ] Practice, Practice, Practice
 
 **Report:**
+```md
+# Buat router
+npm create-react-app client
+Install dependencies
+> Bikin folder router - > indexJs
+> Declare path dan element
+createBrowserRoute pada indexjs
+> Masukin router provider ke app.js
+RouterProvidr pada app js
+[reactRouter](https://reactrouter.com/en/main/start/tutorial)
+```
 
+```md
+# Buat pages
+> Bikin children untuk navbar pakai layout < Outlet > dari react-router
+> Navbar/sidebar
+[daisyUi-Navbar](https://daisyui.com/components/drawer/)
+> Table
+[daisyUi-Table](https://daisyui.com/components/table/)
+> Button
+[daisyUi-Button](https://daisyui.com/components/button/)
+> Text Input
+[Input-daisyUi](https://daisyui.com/components/input/)
+> Theme
+[Theme-daisyUi](https://daisyui.com/docs/themes/)
+```
+
+```md
+# Buat Store
+> Setting store -> index.js
+[Ke-Basic-Example](https://redux.js.org/introduction/getting-started)
+Kalau possible mending langsung digabung juga sama actionCreator yang bakal butuh thunk.
+
+> Import provider react-redux
+[Api-Overview](https://react-redux.js.org/introduction/getting-started)
+
+> Layouting + Fetch -> Bikin actionCreator + thunk
+Ketika fetch jangan lupa check if res.ok dan return res.json()
+[Fetch-Api](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+[json-server](https://github.com/typicode/json-server)
+
+> Ngerjain login handle form, delete, update, create dll.
+
+formwatcher pakai onChange pada input pada useState di spread dimasukin ke useState / lokal dulu.
+
+handleForm pakai onSubmit, kalau mau ada button cancel kasih type button biar ga ngesubmit. Functionya berisi dispatch useState lokal formWatcher.
+
+angan lupa lakukan dispatch fetch apabila diperlukan pada actionCreator/thunk setelah melakukan delete/post/patch.
+
+setelah melakukan update data lakukan navigate pakai hooks usenavigate ke halaman yang dituju.
+```
+
+```
+Notes:
+> Belajar lagi cara CRUID
+
+> Latihan handleForm, Query filter dan sorting
+```
 ...
