@@ -1,18 +1,15 @@
-import {useState, useEffect} from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getProducts } from '../store/actions/actionCreator'
 import ProductCard from '../components/ProductCard'
-import { fetchGet } from '../helpers/fetch'
 
 export default function HomePage() {
 
-  const [products, setProducts] = useState([])
+  const dispatch = useDispatch()
+  const products = useSelector((state) => state.products.productList)
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      const response = await fetchGet('products')
-      let newProducts = [...response]
-      setProducts(newProducts)
-    }
-    fetchProduct()
+    dispatch(getProducts())
   }, [])
 
   return (

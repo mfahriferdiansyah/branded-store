@@ -1,20 +1,19 @@
 import shopImg from '../images/shop.svg'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import SecondaryImage from '../components/SecondaryImage'
 import Button from '../components/Button'
-import { fetchGet } from '../helpers/fetch'
 import { useParams, useNavigate } from 'react-router-dom';
 import toast from '../helpers/toastify'
+import { useDispatch, useSelector } from 'react-redux'
+import { getImages, getProductDetail } from '../store/actions/actionCreator'
 
 export default function DetailPage() {
   const { id } = useParams()
-  const [images, setImages] = useState([])
-  const [product, setProduct] = useState({})
-  let { name, description, price, mainImg } = product
+  const backButton = () => {navigate(-1)}
   const navigate = useNavigate()
-  const backButton = () => {
-    navigate(-1)
-  }
+  const dispatch = useDispatch()
+  const [images, product] = useSelector((state) => [state.images.imagesList, state.products.productDetail])
+  let { name, description, price, mainImg } = product
 
   const clickHandler = (e) => {
     e.preventDefault();
@@ -22,19 +21,8 @@ export default function DetailPage() {
   }
 
   useEffect(() => {
-    const fetchImages = async () => {
-      const response = await fetchGet(`images?productId=${id}`)
-      console.log(response, 'Response from get')
-      setImages(response)
-    }
-    const fetchProduct = async () => {
-      const response = await fetchGet(`products?id=${id}`)
-      console.log(response, 'Response from get')
-      setProduct(response[0])
-      console.log(product)
-    }
-    fetchImages()
-    fetchProduct()
+    dispatch(getImages(id))
+    dispatch(getProductDetail(id))
   }, [])
 
   return (
