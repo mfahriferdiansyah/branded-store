@@ -8,6 +8,7 @@ import {
   RESET_EDIT,
   SET_ISEDIT,
   SET_PATH,
+  SET_ISMODAL
 } from "./actionType";
 
 export const setProductList = (payload) => {
@@ -65,6 +66,13 @@ export const setIsEdit = (payload) => {
   };
 };
 
+export const setIsModal = (payload) => {
+  return {
+    type: SET_ISMODAL,
+    payload,
+  };
+};
+
 export const getProducts = () => {
   return (dispatch) => {
     fetchGet("products")
@@ -106,62 +114,59 @@ export const getCategoryById = (categoryId) => {
 }
 
 export const deleteCategory = (id) => {
-  return (dispatch) => {
-    fetchDelete('categories/'+id)
+  return async (dispatch) => {
+    await fetchDelete('categories/' + id)
       .then(() => dispatch(getCategories()))
-      .catch((error) => console.log(error, 'ioni error'));
   }
 }
 
 export const deleteProduct = (id) => {
-  return (dispatch) => {
-    fetchDelete('products/'+id)
+  return async (dispatch) => {
+    await fetchDelete('products/' + id)
       .then(() => dispatch(getProducts()))
-      .catch((error) => console.log(error));
   }
 }
 
-export const postProducts = (product, img2, img3) => {
-  return (dispatch) => {
-    fetchPost('products', product)
-      .then(({id:productId}) => fetchPost('images', {imgUrl: img2 || '', productId}))
-      .then(({productId}) => fetchPost('images', {imgUrl: img2 || '', productId}))
+export const postProducts = (product) => {
+  return async (dispatch) => {
+    await fetchPost('products', product)
       .then(() => dispatch(getProducts()))
-      .catch((error) => console.log(error));
   }
 }
 
-export const patchProducts = ({product, img2, img3, imgId2, imgId3, productId}) => {
-  return (dispatch) => {
-    fetchPatch('products/'+productId, product)
-      .then(() => fetchPatch('images/'+imgId2, {imgUrl: img2, productId}))
-      .then(() => fetchPatch('images/'+imgId3, {imgUrl: img3, productId}))
+export const patchProducts = ({ product, productId }) => {
+  return async (dispatch) => {
+    console.log('ini dari action')
+    await fetchPatch('products/' + productId, product)
       .then(() => dispatch(getProducts()))
-      .catch((error) => console.log(error));
   }
 }
 
 export const postUser = (newRegister) => {
   return () => {
     fetchPost('authors', newRegister)
-      .then((response) => console.log('Success register: ' + response.email ))
+      .then((response) => console.log('Success register: ' + response.email))
       .catch((error) => console.log(error));
-  } 
-}
-
-export const postCategory = (newCategory) => {
-  return (dispatch) => {
-    fetchPost('categories', newCategory)
-    .then((response) => console.log('Success add category: '+ response.name))
-    .then(() => dispatch(getCategories()))
-    .catch((error) => console.log(error));
   }
 }
 
-export const patchCategory = ({id, newCategory}) => {
-  return (dispatch) => {
-    fetchPatch('categories/'+id, newCategory)
+export const postCategory = (newCategory) => {
+  return async (dispatch) => {
+   await fetchPost('categories', newCategory)
+      .then(() => dispatch(getCategories()))
+  }
+}
+
+export const patchCategory = ({ id, newCategory }) => {
+  return async (dispatch) => {
+    await fetchPatch('categories/' + id, newCategory)
       .then(() => dispatch(getCategories))
-      .catch((error) => console.log(error));
+  }
+}
+
+export const postLogin = (data) => {
+  return async () => {
+    await fetchPost('login', data)
+      .then(({access_token}) => localStorage.access_token = access_token)
   }
 }

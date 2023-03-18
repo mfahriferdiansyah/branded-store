@@ -1,67 +1,60 @@
-const baseUrl = 'http://localhost:4000/'
+const baseUrl = 'http://localhost:3000/'
 
 async function fetchPost(endpoint, dataTarget) {
-  try {
     const response = await fetch(baseUrl + endpoint, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
+        "access_token": localStorage.access_token
       },
       body: JSON.stringify(dataTarget)
     })
-    if (!response.ok) throw response.text
+    if (!response.ok) throw await response.text()
     const parsedResponse = await response.json()
     console.log(parsedResponse, '<--- POST Method')
-    return parsedResponse
-  } catch (error) {
-    console.log(error, '<--- POST Method Error')
-    return error
-  }
+    return await parsedResponse
 }
 
 async function fetchGet(endpoint) {
-  try {
     const response = await fetch(baseUrl + endpoint, {
       method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        "access_token": localStorage.access_token
+      },
     })
-    if (!response.ok) throw response.text
+    if (!response.ok) throw await response.text()
     const parsedResponse = await response.json()
     console.log(parsedResponse, '<--- GET Method')
-    return parsedResponse
-  } catch (error) {
-    console.log(error, '<--- GET Method Error')
-    return error
-  }
+    return await parsedResponse
 }
 
 async function fetchDelete(endpoint) {
-  try {
     const response = await fetch(baseUrl + endpoint, {
       method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json",
+        "access_token": localStorage.access_token
+      },
     })
+    console.log(response, 'res del')
+    if (!response.ok) throw await response.text()
+    console.log(response, '<--- DELETE Method')
     return response
-  } catch (error) {
-    console.log(error, '<--- DELETE Method Error')
-    return error
-  }
 }
 
 async function fetchPatch(endpoint, dataTarget){
-  try {
     const response = await fetch(baseUrl + endpoint, {
       method: 'PATCH',
       headers: {
         "Content-Type": "application/json",
+        "access_token": localStorage.access_token
       },
       body: JSON.stringify(dataTarget)
     })
-    if (!response.ok) throw response.text
-    const parsedResponse = await response.json()
-    console.log(parsedResponse, '<--- POST Method')
-    return parsedResponse
-  } catch (error) {
-    console.log(error, '<--- POST Method Error')
-    return error
-  }
+    if (!response.ok) throw await response.text()
+    console.log(response, '<--- Patch Method')
+    return  response
 }
+
 module.exports = {fetchPost, fetchGet, fetchDelete, fetchPatch}

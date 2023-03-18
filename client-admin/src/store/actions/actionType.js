@@ -13,3 +13,5 @@ export const RESET_EDIT = "resetEdit";
 export const SET_PATH = "pathNow/assign";
 
 export const SET_ISEDIT = "isEdit/assign";
+
+export const SET_ISMODAL = "isModal/assign";

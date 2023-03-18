@@ -4,11 +4,13 @@ import { useEffect } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { useLocation} from 'react-router-dom'
 import { resetEditData, setPathNow, getCategories, getProducts } from '../store/actions/actionCreator'
+import ImageModal from '../components/ImageModal'
 
 export default function HomePage() {
   const dispatch = useDispatch()
   const location = useLocation()
-  const pathNow = useSelector((state) => state.general.pathNow)
+  const isModal = useSelector((state) => state.general.isModal)
+  const pathNow = location.pathname
 
   useEffect(() => {
     dispatch(setPathNow(location.pathname))
@@ -36,6 +38,9 @@ export default function HomePage() {
           <Table pathNow={pathNow} />
         </div>
       </div>
+      {
+        isModal ? <ImageModal /> : ''
+      }
     </>
   )
 }

@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:4000/'
+const baseUrl = 'http://localhost:3000/'
 
 async function fetchPost(endpoint, dataTarget) {
   try {

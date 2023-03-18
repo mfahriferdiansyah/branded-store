@@ -2,10 +2,12 @@ import {
   RESET_EDIT,
   SET_ISEDIT,
   SET_PATH,
+  SET_ISMODAL
 } from "../actions/actionType";
 
 const initialState = {
   isEdit: false,
+  isModal: false,
   pathNow: "",
 };
 
@@ -28,6 +30,12 @@ export default function generalReducer(state = initialState, action) {
       return {
         ...state,
         isEdit: action.payload,
+      };
+
+    case SET_ISMODAL:
+      return {
+        ...state,
+        isModal: action.payload,
       };
 
     default:
