@@ -48,7 +48,7 @@ Target:
 - [x] Lecture - React-Router
 - [x] Membuat router user-side (min: home, detail)
 - [x] Membuat router admin-side (min: login, add admin, CRUD main entitas, CRUD another entitas)
-- [ ] Membuat privateRoute untuk admin
+- [x] Membuat privateRoute untuk admin
 
 **Report:**
 
@@ -81,10 +81,10 @@ Target:
 Target:
 
 - [x] Lecture - SQL Transaction
-- [ ] Membuat server mengguanakan express.js, postgreSQL dan Sequelize
-- [ ] Menentukan associations antar tables
+- [x] Membuat server mengguanakan express.js, postgreSQL dan Sequelize
+- [x] Menentukan associations antar tables
 - [x] Lecture - AWS EC2
-- [ ] Membuat transaction saat membuat entitas baru pada main table. Pastikan ada assosiasi di dalamnya
+- [x] Membuat transaction saat membuat entitas baru pada main table. Pastikan ada assosiasi di dalamnya
 
 **Report:**
 
@@ -97,7 +97,7 @@ Target:
 Target:
 
 - [x] LC Simulation
-- [ ] Practice, Practice, Practice
+- [x] Practice, Practice, Practice
 
 **Report:**
 ```md
