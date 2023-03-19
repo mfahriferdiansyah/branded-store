@@ -12,6 +12,7 @@ export default function ReactForm() {
 
   function checkForm(e) {
     e.preventDefault()
+
     let { name, value } = e.target
     let newInput = {
       ...productForm,
@@ -27,6 +28,13 @@ export default function ReactForm() {
   async function formHandler(e) {
     e.preventDefault()
     let { name, price, mainImg, img2, img3, description, categoryId = 1 } = { ...productForm }
+    if (!name) return errorToast('Name is required')
+    if (!price) return errorToast('Price is required')
+    if (!mainImg) return errorToast('Main Image is required')
+    if (!img2) return errorToast('2nd Image is required')
+    if (!img3) return errorToast('3rd Image is required')
+    if (!description) return errorToast('3rd Image is required')
+
     let slug = name?.toLowerCase().split(' ').join('-') + Date.now()
     let productData = { name, price: parseFloat(price), mainImg, description, categoryId: parseFloat(categoryId), slug, img2, img3 }
 
@@ -63,7 +71,10 @@ export default function ReactForm() {
         ...editProduct,
         img2: editImg[0]?.imgUrl, img3: editImg[1]?.imgUrl
       })
+    } else {
+      setProductForm({})
     }
+
   }, [editProduct, editImg])
 
   return (
