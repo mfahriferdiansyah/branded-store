@@ -10,6 +10,12 @@ export const EDITCATEGORY_FETCH = "editCategory/fetchSuccess";
 
 export const RESET_EDIT = "resetEdit";
 
-export const SET_PATH = "pathNow/assign";
-
 export const SET_ISEDIT = "isEdit/assign";
+
+export const SET_ISMODAL = "isModal/assign";
+
+export const SET_ISLOADING = "isLoading/assign"
+
+export const SET_ISMODALLOADING = "isModalLoading/assign"
+
+export const SET_FETCHDATA = "fetchData/assign"

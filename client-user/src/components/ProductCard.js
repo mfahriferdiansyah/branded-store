@@ -1,10 +1,7 @@
-import {useState, useEffect} from 'react'
 import Button from '../components/Button'
-const imgUrl = "https://www.armani.com/variants/images/38063312418554598/F/w1280.jpg"
-
 
 export default function ProductCard({data}) {
-  let {id, name, slug, descipriton, price, mainImg} = data
+  let {id, name, slug, descipriton, price, mainImg, User} = data
   
   return (
     <>

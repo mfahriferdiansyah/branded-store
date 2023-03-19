@@ -1,4 +1,5 @@
 import { fetchDelete, fetchGet, fetchPatch, fetchPost } from "../../helpers/fetch";
+
 import {
   CATEGORY_FETCH,
   EDITCATEGORY_FETCH,
@@ -7,7 +8,10 @@ import {
   PRODUCT_FETCH,
   RESET_EDIT,
   SET_ISEDIT,
-  SET_PATH,
+  SET_ISMODAL,
+  SET_ISLOADING,
+  SET_ISMODALLOADING,
+  SET_FETCHDATA
 } from "./actionType";
 
 export const setProductList = (payload) => {
@@ -51,13 +55,6 @@ export const resetEditData = () => {
   };
 };
 
-export const setPathNow = (payload) => {
-  return {
-    type: SET_PATH,
-    payload,
-  };
-};
-
 export const setIsEdit = (payload) => {
   return {
     type: SET_ISEDIT,
@@ -65,103 +62,153 @@ export const setIsEdit = (payload) => {
   };
 };
 
+export const setIsModal = (payload) => {
+  return {
+    type: SET_ISMODAL,
+    payload,
+  };
+};
+
+export const setIsLoading = (payload) => {
+  return {
+    type: SET_ISLOADING,
+    payload
+  }
+}
+
+export const setIsModalLoading = (payload) => {
+  return {
+    type: SET_ISMODALLOADING,
+    payload
+  }
+}
+
+export const setFetchData = (payload) => {
+  return {
+    type: SET_FETCHDATA,
+    payload
+  }
+}
+
+
 export const getProducts = () => {
   return (dispatch) => {
+    dispatch(setIsLoading(true))
     fetchGet("products")
       .then((products) => dispatch(setProductList(products)))
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(() => dispatch(setIsLoading(false)))
   };
 };
 
 export const getCategories = () => {
   return (dispatch) => {
+    dispatch(setIsLoading(true))
     fetchGet("categories")
       .then((categories) => dispatch(setCategoryList(categories)))
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(() => dispatch(setIsLoading(false)))
   };
 };
 
 export const getImages = (productId) => {
   return (dispatch) => {
+    dispatch(setIsModalLoading(true))
     fetchGet(`images?productId=${productId}`)
       .then((images) => dispatch(setImageList(images)))
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(() => dispatch(setIsModalLoading(false)))
   };
 };
 
 export const getProductById = (productId) => {
   return (dispatch) => {
+    dispatch(setIsLoading(true))
     fetchGet(`products?id=${productId}`)
       .then(([product]) => dispatch(setProductById(product)))
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(() => dispatch(setIsLoading(false)))
   };
 };
 
 export const getCategoryById = (categoryId) => {
   return (dispatch) => {
+    dispatch(setIsLoading(true))
     fetchGet(`categories?id=${categoryId}`)
       .then(([category]) => dispatch(setCategoryById(category)))
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(() => dispatch(setIsLoading(false)))
   }
 }
 
 export const deleteCategory = (id) => {
-  return (dispatch) => {
-    fetchDelete('categories/'+id)
+  return async (dispatch) => {
+    dispatch(setIsLoading(true))
+    await fetchDelete('categories/' + id)
       .then(() => dispatch(getCategories()))
-      .catch((error) => console.log(error, 'ioni error'));
+      .finally(() => dispatch(setIsLoading(false)))
   }
 }
 
 export const deleteProduct = (id) => {
-  return (dispatch) => {
-    fetchDelete('products/'+id)
+  return async (dispatch) => {
+    dispatch(setIsLoading(true))
+    await fetchDelete('products/' + id)
       .then(() => dispatch(getProducts()))
-      .catch((error) => console.log(error));
+      .finally(() => dispatch(setIsLoading(false)))
   }
 }
 
-export const postProducts = (product, img2, img3) => {
-  return (dispatch) => {
-    fetchPost('products', product)
-      .then(({id:productId}) => fetchPost('images', {imgUrl: img2 || '', productId}))
-      .then(({productId}) => fetchPost('images', {imgUrl: img2 || '', productId}))
+export const postProducts = (product) => {
+  return async (dispatch) => {
+    dispatch(setIsLoading(true))
+    await fetchPost('products', product)
       .then(() => dispatch(getProducts()))
-      .catch((error) => console.log(error));
+      .finally(() => dispatch(setIsLoading(false)))
   }
 }
 
-export const patchProducts = ({product, img2, img3, imgId2, imgId3, productId}) => {
-  return (dispatch) => {
-    fetchPatch('products/'+productId, product)
-      .then(() => fetchPatch('images/'+imgId2, {imgUrl: img2, productId}))
-      .then(() => fetchPatch('images/'+imgId3, {imgUrl: img3, productId}))
+export const patchProducts = ({ product, productId }) => {
+  return async (dispatch) => {
+    dispatch(setIsLoading(true))
+    await fetchPatch('products/' + productId, product)
       .then(() => dispatch(getProducts()))
-      .catch((error) => console.log(error));
+      .finally(() => dispatch(setIsLoading(false)))
   }
 }
 
 export const postUser = (newRegister) => {
-  return () => {
-    fetchPost('authors', newRegister)
-      .then((response) => console.log('Success register: ' + response.email ))
-      .catch((error) => console.log(error));
-  } 
-}
-
-export const postCategory = (newCategory) => {
-  return (dispatch) => {
-    fetchPost('categories', newCategory)
-    .then((response) => console.log('Success add category: '+ response.name))
-    .then(() => dispatch(getCategories()))
-    .catch((error) => console.log(error));
+  return async (dispatch) => {
+    dispatch(setIsLoading(true))
+    await fetchPost('register', newRegister)
+      .then((response) => console.log('Success register: ' + response.email))
+      .finally(() => dispatch(setIsLoading(false)))
   }
 }
 
-export const patchCategory = ({id, newCategory}) => {
-  return (dispatch) => {
-    fetchPatch('categories/'+id, newCategory)
+export const postCategory = (newCategory) => {
+  return async (dispatch) => {
+    dispatch(setIsLoading(true))
+    await fetchPost('categories', newCategory)
+      .then(() => dispatch(getCategories()))
+      .finally(() => dispatch(setIsLoading(false)))
+  }
+}
+
+export const patchCategory = ({ id, newCategory }) => {
+  return async (dispatch) => {
+    dispatch(setIsLoading(true))
+    await fetchPatch('categories/' + id, newCategory)
       .then(() => dispatch(getCategories))
-      .catch((error) => console.log(error));
+      .finally(() => dispatch(setIsLoading(false)))
+  }
+}
+
+export const postLogin = (data) => {
+  return async (dispatch) => {
+    dispatch(setIsLoading(true))
+    await fetchPost('login', data)
+      .then(({ access_token }) => localStorage.access_token = access_token)
+      .finally(() => dispatch(setIsLoading(false)))
   }
 }

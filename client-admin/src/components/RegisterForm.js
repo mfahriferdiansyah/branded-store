@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import { useDispatch } from 'react-redux'
 import {useNavigate } from 'react-router-dom'
+import { errorToast, successToast } from '../helpers/toast'
 import { postUser } from '../store/actions/actionCreator'
 
 export default function ReactForm () {
@@ -20,19 +21,25 @@ export default function ReactForm () {
 
   async function formHandler(e) {
     e.preventDefault()
-    dispatch(postUser({...registerForm}))
-    setRegisterForm({})
-    navigate(-1)
+    if(!registerForm.username) errorToast('Username required')
+    else if(!registerForm.email) errorToast('Email is required')
+    else if (!registerForm.password) errorToast ('Password is requried')
+    else {
+      await dispatch(postUser({...registerForm}))
+      .then(() => navigate(-1))
+      .then(() => successToast('User registered'))
+      .catch((error) => errorToast(error))
+      setRegisterForm({})
+    }
   }
 
-  useEffect(() => {
-  }, [])
 
   return (
   <>
     <form action="" onSubmit={formHandler} className="flex flex-col w-60 gap-5 mx-5">
-      <input onChange={checkForm} type="email" name='email' className="px-3 py-2 shadow-md rounded-md" placeholder="Email"  required/>
-      <input onChange={checkForm} type="password" name='password' className="px-3 py-2 shadow-md rounded-md" placeholder="Password" required/>
+      <input onChange={checkForm} type="text" name='username' className="px-3 py-2 shadow-md rounded-md" placeholder="Username"  />
+      <input onChange={checkForm} type="text" name='email' className="px-3 py-2 shadow-md rounded-md" placeholder="Email"  />
+      <input onChange={checkForm} type="password" name='password' className="px-3 py-2 shadow-md rounded-md" placeholder="Password" />
       
       <button type="submit" className="py-1 mt-2 w-full rounded-3xl text-lg hover:bg-green-800 bg-green-900 text-white">
         Register

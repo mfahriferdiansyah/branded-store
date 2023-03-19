@@ -1,20 +1,36 @@
-import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { deleteCategory, deleteProduct } from '../store/actions/actionCreator'
+import { useDispatch, useSelector } from 'react-redux'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { errorToast, successToast } from '../helpers/toast'
+import { deleteCategory, deleteProduct, getImages, setIsModal } from '../store/actions/actionCreator'
 
-export default function TableRow({index, data, pathNow}) {
+export default function TableRow({index, data}) {
   const navigate = useNavigate()
-  let {id, name, price, slug, description, mainImg, categoryId, authorId} = data
+  let {id, name, price, slug, description, mainImg, User, Category} = data
+  const location = useLocation()
+  const isModal = useSelector((state) => state.general?.isModal)
   
   const dispatch = useDispatch()
   async function deleteHandler(e) {
-    if(pathNow === '/category-page') dispatch(deleteCategory(id))
-    else if(pathNow === '/') dispatch(deleteProduct(id))
+    if(location.pathname === '/category-page') {
+      await dispatch(deleteCategory(id))
+        .then(() => successToast('Category deleted'))
+        .catch((error) => errorToast(error))
+    }
+    else if(location.pathname === '/') {
+      await dispatch(deleteProduct(id))
+      .then(() => successToast('Product deleted'))
+      .catch((error) => errorToast(error))
+    }
   }
 
   async function editHandler(e){
-    if(pathNow === '/category-page') navigate('/input-page/category?id='+id)
-    else if(pathNow === '/') navigate('/input-page?productId='+id)
+    if(location.pathname === '/category-page') navigate('/input-page/category?id='+id)
+    else if(location.pathname === '/') navigate('/input-page?productId='+id)
+  }
+
+  async function openImage(e){
+    dispatch(getImages(id))
+    dispatch(setIsModal(!isModal))
   }
 
   return (
@@ -22,13 +38,25 @@ export default function TableRow({index, data, pathNow}) {
       <tr className="flex px-5 py-3 font-mono">
         <td className="basis-1/12">{index}</td>
         {
-          pathNow === '/' ?<>          
+          location.pathname === '/' ?<>          
             <td className="basis-7/12">
               <div className="flex gap-5">
                 <img className="rounded-md  w-44" src={mainImg} alt={slug} />
-                <div className="flex flex-col gap-3">
-                <p>{name}</p>
-                <p className="text-lg">{description}</p>
+                <div className="flex flex-col justify-between gap-10">
+                <div className='flex flex-col gap-3'>
+                  <p>{name} <span className='text-sm'>({Category?.name})</span></p>
+                  <p className="text-sm">{description}</p>
+                  <p className="text-sm">Authors: {User?.username}</p>
+                </div>
+                <div className='flex justify-start items-start h-full'>                  
+                <button
+                    type="button"
+                    className="inline-flex w-52 justify-center rounded-md bg-green-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-600"
+                    onClick={openImage}
+                  >
+                    More Images
+                  </button>
+                </div>
                 </div>
               </div>
             </td>

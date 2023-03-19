@@ -1,5 +1,6 @@
-import { fetchGet, fetchPost } from "../../helpers/fetch"
-import { IMAGES_FETCH, PRODUCT_DETAIL, PRODUCT_FETCH } from "./actionType"
+import { fetchGet } from "../../helpers/fetch"
+import toastify from "../../helpers/toastify"
+import { IMAGES_FETCH, PRODUCT_DETAIL, PRODUCT_FETCH, SET_ISLOADING } from "./actionType"
 
 export const setImages = (payload) => {
   return {
@@ -22,26 +23,30 @@ export const setProductDetail = (payload) => {
   }
 }
 
+export const setIsLoading = (payload) => {
+  return {
+    type: SET_ISLOADING,
+    payload
+  }
+}
+
 export const getImages = (id) => {
  return (dispatch) => {
-  fetchGet(`images?productId=${id}`)
-  .then((response) => dispatch(setImages(response)))
-  .catch((error) => console.log(error))
+  dispatch(setIsLoading(true))
+  return fetchGet(`images?productId=${id}`)
  }
 }
 
 export const getProductDetail = (id) => {
   return (dispatch) => {
-    fetchGet(`products?id=${id}`)
-    .then(([response]) => dispatch(setProductDetail(response)))
-    .catch((error) => console.log(error))
+    dispatch(setIsLoading(true))
+    return fetchGet(`products?id=${id}`)
   }
 }
 
 export const getProducts = () => {
   return (dispatch) => {
-    fetchGet('products')
-      .then((response) => dispatch(setProductList(response)))
-      .catch((error) => console.log(error))
+    dispatch(setIsLoading(true))
+    return fetchGet('products')
   }
 }
