@@ -4,6 +4,7 @@ const ContorllerProduct = require('../controllers/productController')
 const authentication = require('../middlewares/authentication')
 
 router.get('/products', authentication, ContorllerProduct.getProducts)
+router.get('/pub/products', ContorllerProduct.getProducts)
 router.post('/products', authentication, ContorllerProduct.postProducts)
 router.patch('/products/:id', authentication, ContorllerProduct.patchProduct)
 router.delete('/products/:id', authentication, ContorllerProduct.deleteProducts)

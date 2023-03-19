@@ -1,20 +1,29 @@
+import { PRODUCT_DETAIL, PRODUCT_FETCH, SET_ISLOADING } from "../actions/actionType"
+
 const intialState = {
   productList: [],
-  productDetail: {}
+  productDetail: {},
+  isLoading: false
 }
 
 export default function productReducer(state = intialState, action) {
   switch (action.type) {
-    case 'products/fetchSuccess':
+    case PRODUCT_FETCH:
       return {
         ...state,
         productList: action.payload
       }
 
-    case 'productDetail/fetchSuccess':
+    case PRODUCT_DETAIL:
       return {
         ...state,
         productDetail: action.payload
+      }
+
+    case SET_ISLOADING:
+      return {
+        ...state,
+        isLoading: action.payload
       }
 
     default:

@@ -1,16 +1,24 @@
+import ProductCard from '../components/ProductCard'
+import Loading from '../components/Loading'
+
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getProducts } from '../store/actions/actionCreator'
-import ProductCard from '../components/ProductCard'
+import { getProducts, setIsLoading, setProductList } from '../store/actions/actionCreator'
+import toastify from '../helpers/toastify'
 
 export default function HomePage() {
 
   const dispatch = useDispatch()
-  const products = useSelector((state) => state.products.productList)
+  const [products, isLoading] = useSelector((state) => [state.products?.productList, state.products?.isLoading])
 
   useEffect(() => {
     dispatch(getProducts())
+    .then((response) => dispatch(setProductList(response)))
+    .catch((error) => toastify('Products: ' + error, 'error'))
+    .finally(() => dispatch(setIsLoading(false)))
   }, [])
+
+  if (isLoading) return <Loading />
 
   return (
     <>
@@ -23,7 +31,7 @@ export default function HomePage() {
           <hr className='border-green-700' />
           <div className="flex flex-wrap py-5 gap-11">
             {
-              products.map(el => <ProductCard key={el.id} data={el} />)
+              products?.map(el => <ProductCard key={el.id} data={el} />)
             }
           </div>
         </div>

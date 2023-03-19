@@ -1,37 +1,17 @@
-const baseUrl = 'http://localhost:3000/'
-
-async function fetchPost(endpoint, dataTarget) {
-  try {
-    const response = await fetch(baseUrl + endpoint, {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataTarget)
-    })
-    if (!response.ok) throw response.text
-    const parsedResponse = await response.json()
-    console.log(parsedResponse, '<--- POST Method')
-    return parsedResponse
-  } catch (error) {
-    console.log(error, '<--- POST Method Error')
-    return error
-  }
-}
+const baseUrl = 'http://localhost:3000/pub/'
 
 async function fetchGet(endpoint) {
-  try {
-    const response = await fetch(baseUrl + endpoint, {
-      method: 'GET',
-    })
-    if (!response.ok) throw response.text
-    const parsedResponse = await response.json()
-    console.log(parsedResponse, '<--- GET Method')
-    return parsedResponse
-  } catch (error) {
-    console.log(error, '<--- GET Method Error')
-    return error
-  }
+  const response = await fetch(baseUrl + endpoint, {
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json",
+      "access_token": localStorage.access_token
+    },
+  })
+  if (!response.ok) throw await response.text()
+  const parsedResponse = await response.json()
+  console.log(parsedResponse, '<--- GET Method')
+  return await parsedResponse
 }
 
-module.exports = {fetchPost, fetchGet}
+module.exports = {fetchGet}
