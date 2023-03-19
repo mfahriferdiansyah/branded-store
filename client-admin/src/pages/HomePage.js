@@ -5,9 +5,8 @@ import Loading from '../components/Loading'
 
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { resetEditData, getCategories, getProducts, setIsLoading } from '../store/actions/actionCreator'
-import { errorToast } from '../helpers/toast'
+import { useLocation } from 'react-router-dom'
+import { resetEditData, getCategories, getProducts } from '../store/actions/actionCreator'
 
 export default function HomePage() {
   const dispatch = useDispatch()

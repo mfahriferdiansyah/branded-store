@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { errorToast, successToast } from '../helpers/toast'
-import { patchProducts, postProducts, setCategoryList } from '../store/actions/actionCreator'
+import { patchProducts, postProducts } from '../store/actions/actionCreator'
 
 export default function ReactForm() {
   const dispatch = useDispatch()

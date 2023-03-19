@@ -1,6 +1,5 @@
 import { createBrowserRouter, redirect } from 'react-router-dom'
 import Layout from '../components/Layout'
-import { fetchGet } from '../helpers/fetch'
 import HomePage from '../pages/HomePage'
 import InputPage from '../pages/InputPage'
 import LoginPage from '../pages/LoginPage'

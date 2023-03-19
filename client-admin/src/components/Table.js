@@ -1,7 +1,6 @@
 import TableRow from './TableRow'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
-import { setFetchData } from '../store/actions/actionCreator'
 
 export default function Table() {
   const location = useLocation()

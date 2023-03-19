@@ -1,7 +1,7 @@
 // const baseUrl = 'http://localhost:3000/pub/'
 const baseUrl = 'https://server.mfahri.com/pub/'
 
-async function fetchGet(endpoint) {
+export async function fetchGet(endpoint) {
   const response = await fetch(baseUrl + endpoint, {
     method: 'GET',
     headers: {
@@ -14,5 +14,3 @@ async function fetchGet(endpoint) {
   console.log(parsedResponse, '<--- GET Method')
   return await parsedResponse
 }
-
-module.exports = {fetchGet}
