@@ -1,7 +1,7 @@
 // const baseUrl = 'http://localhost:3000/'
-const baseUrl = 'https://server.mfahri.com/pub/'
+const baseUrl = 'https://server.mfahri.com/'
 
-async function fetchPost(endpoint, dataTarget) {
+export async function fetchPost(endpoint, dataTarget) {
     const response = await fetch(baseUrl + endpoint, {
       method: 'POST',
       headers: {
@@ -16,7 +16,7 @@ async function fetchPost(endpoint, dataTarget) {
     return await parsedResponse
 }
 
-async function fetchGet(endpoint) {
+export async function fetchGet(endpoint) {
     const response = await fetch(baseUrl + endpoint, {
       method: 'GET',
       headers: {
@@ -30,7 +30,7 @@ async function fetchGet(endpoint) {
     return await parsedResponse
 }
 
-async function fetchDelete(endpoint) {
+export async function fetchDelete(endpoint) {
     const response = await fetch(baseUrl + endpoint, {
       method: 'DELETE',
       headers: {
@@ -44,7 +44,7 @@ async function fetchDelete(endpoint) {
     return response
 }
 
-async function fetchPatch(endpoint, dataTarget){
+export async function fetchPatch(endpoint, dataTarget){
     const response = await fetch(baseUrl + endpoint, {
       method: 'PATCH',
       headers: {
@@ -57,5 +57,3 @@ async function fetchPatch(endpoint, dataTarget){
     console.log(response, '<--- Patch Method')
     return  response
 }
-
-module.exports = {fetchPost, fetchGet, fetchDelete, fetchPatch}
