@@ -10,7 +10,7 @@ export default function ReactForm() {
   const [categoryForm, setCategoryForm] = useState({})
   const [searchParams] = useSearchParams()
   const [isEdit, editCategory] = useSelector((state) => {
-    return [state.general.isEdit, state.categories.editCategory]
+    return [state.general?.isEdit, state.categories?.editCategory]
   })
 
   function checkForm(e) {

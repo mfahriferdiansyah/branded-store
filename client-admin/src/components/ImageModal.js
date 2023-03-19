@@ -1,12 +1,11 @@
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getImages, setIsModal } from '../store/actions/actionCreator'
-
+import { setIsModal } from '../store/actions/actionCreator'
 
 export default function Example() {
 
-  const [isModal, imgList] = useSelector((state) => [state.general.isModal, state.images.editImg])
+  const [isModal, imgList, isModalLoading] = useSelector((state) => [state.general?.isModal, state.images?.editImg, state.general?.isModalLoading])
   const dispatch = useDispatch()
 
   const cancelButtonRef = useRef(null)
@@ -47,11 +46,12 @@ export default function Example() {
                     </div>
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                       <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-green-900">
-                        Additional Images
+                        {isModalLoading ? 'Loading' : 'Additional Images'}
                       </Dialog.Title>
                       <div className="mt-5 flex gap-5">
                         {
-                          imgList?.map(el => <img className='h-64' src={el.imgUrl} alt={el.imgUrl} key={el.id} />)
+                          isModalLoading ? <p>Loading....</p> :
+                            imgList?.map(el => <img className='h-64' src={el.imgUrl} alt={el.imgUrl} key={el.id} />)
                         }
                       </div>
                     </div>

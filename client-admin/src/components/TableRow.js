@@ -1,22 +1,22 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { errorToast, successToast } from '../helpers/toast'
 import { deleteCategory, deleteProduct, getImages, setIsModal } from '../store/actions/actionCreator'
 
-export default function TableRow({index, data, pathNow}) {
+export default function TableRow({index, data}) {
   const navigate = useNavigate()
-  let {id, name, price, slug, description, mainImg, categoryId, authorId, User, Category} = data
-
-  const isModal = useSelector((state) => state.general.isModal)
+  let {id, name, price, slug, description, mainImg, User, Category} = data
+  const location = useLocation()
+  const isModal = useSelector((state) => state.general?.isModal)
   
   const dispatch = useDispatch()
   async function deleteHandler(e) {
-    if(pathNow === '/category-page') {
+    if(location.pathname === '/category-page') {
       await dispatch(deleteCategory(id))
         .then(() => successToast('Category deleted'))
         .catch((error) => errorToast(error))
     }
-    else if(pathNow === '/') {
+    else if(location.pathname === '/') {
       await dispatch(deleteProduct(id))
       .then(() => successToast('Product deleted'))
       .catch((error) => errorToast(error))
@@ -24,8 +24,8 @@ export default function TableRow({index, data, pathNow}) {
   }
 
   async function editHandler(e){
-    if(pathNow === '/category-page') navigate('/input-page/category?id='+id)
-    else if(pathNow === '/') navigate('/input-page?productId='+id)
+    if(location.pathname === '/category-page') navigate('/input-page/category?id='+id)
+    else if(location.pathname === '/') navigate('/input-page?productId='+id)
   }
 
   async function openImage(e){
@@ -38,7 +38,7 @@ export default function TableRow({index, data, pathNow}) {
       <tr className="flex px-5 py-3 font-mono">
         <td className="basis-1/12">{index}</td>
         {
-          pathNow === '/' ?<>          
+          location.pathname === '/' ?<>          
             <td className="basis-7/12">
               <div className="flex gap-5">
                 <img className="rounded-md  w-44" src={mainImg} alt={slug} />

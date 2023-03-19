@@ -1,14 +1,18 @@
 import {
   RESET_EDIT,
   SET_ISEDIT,
-  SET_PATH,
-  SET_ISMODAL
+  SET_ISMODAL,
+  SET_ISLOADING,
+  SET_ISMODALLOADING,
+  SET_FETCHDATA
 } from "../actions/actionType";
 
 const initialState = {
   isEdit: false,
   isModal: false,
-  pathNow: "",
+  isLoading: false,
+  isModalLoading: false,
+  fetchData: []
 };
 
 export default function generalReducer(state = initialState, action) {
@@ -18,12 +22,6 @@ export default function generalReducer(state = initialState, action) {
         ...state,
         editImg: [],
         editProduct: {},
-      };
-
-    case SET_PATH:
-      return {
-        ...state,
-        pathNow: action.payload,
       };
 
     case SET_ISEDIT:
@@ -36,6 +34,24 @@ export default function generalReducer(state = initialState, action) {
       return {
         ...state,
         isModal: action.payload,
+      };
+
+    case SET_ISLOADING:
+      return {
+        ...state,
+        isLoading: action.payload,
+      };
+
+    case SET_ISMODALLOADING:
+      return {
+        ...state,
+        isModalLoading: action.payload,
+      };
+
+    case SET_FETCHDATA:
+      return {
+        ...state,
+        fetchData: action.payload,
       };
 
     default:

@@ -52,9 +52,10 @@ class ContorllerProduct {
   static async postProducts(req, res, next){
     const t = await sequelize.transaction();
     try {
-      const {name, slug, price, mainImg, img2, img3, description, categoryId, authorId} = req.body
+      const {id} = req.user
+      const {name, slug, price, mainImg, img2, img3, description, categoryId} = req.body
       console.log(req.body, 'BODYYYYYYYYYYYYYY')
-      const productData = await Product.create({name, slug, price, mainImg, description, categoryId, authorId}, { transaction: t })
+      const productData = await Product.create({name, slug, price, mainImg, description, categoryId, authorId : id}, { transaction: t })
       const img2Data = await Image.create({imgUrl: img2, productId: productData.id}, { transaction: t })
       const img3Data = await Image.create({imgUrl: img3, productId: productData.id}, { transaction: t })
       await t.commit();

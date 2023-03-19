@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { errorToast, successToast } from '../helpers/toast'
-import { patchProducts, postProducts } from '../store/actions/actionCreator'
+import { patchProducts, postProducts, setCategoryList } from '../store/actions/actionCreator'
 
 export default function ReactForm() {
   const dispatch = useDispatch()
@@ -21,14 +21,14 @@ export default function ReactForm() {
   }
 
   const [isEdit, editImg, editProduct, categoryList] = useSelector((state) => {
-    return [state.general.isEdit, state.images.editImg, state.products.editProduct, state.categories.categoryList]
+    return [state.general?.isEdit, state.images?.editImg, state.products?.editProduct, state.categories?.categoryList]
   })
 
   async function formHandler(e) {
     e.preventDefault()
     let { name, price, mainImg, img2, img3, description, categoryId = 1 } = { ...productForm }
-    let slug = name?.toLowerCase().split(' ').join('-')
-    let productData = { name, price: parseFloat(price), mainImg, description, categoryId: parseFloat(categoryId), authorId: 1, slug, img2, img3 }
+    let slug = name?.toLowerCase().split(' ').join('-') + Date.now()
+    let productData = { name, price: parseFloat(price), mainImg, description, categoryId: parseFloat(categoryId), slug, img2, img3 }
 
     if (!isEdit) {
       dispatch(postProducts(productData))
@@ -79,7 +79,7 @@ export default function ReactForm() {
         <input defaultValue={productForm?.description} onChange={checkForm} type="text" name='description' className="px-3 py-2 shadow-md rounded-md" placeholder="Description" />
         <select defaultValue={productForm?.categoryId || '1'} onChange={checkForm} name="categoryId" className="px-3 py-2 shadow-md rounded-md"  >
           {
-            categoryList?.map((el) => <option value={el?.id} key={el.id}>{el?.name}</option>)
+            categoryList?.map((el) => <option value={el?.id} key={el?.id}>{el?.name}</option>)
           }
         </select>
 

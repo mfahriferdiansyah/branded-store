@@ -1,24 +1,27 @@
 import Table from '../components/Table'
 import AddButton from '../components/AddButton'
-import { useEffect } from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import { useLocation} from 'react-router-dom'
-import { resetEditData, setPathNow, getCategories, getProducts } from '../store/actions/actionCreator'
 import ImageModal from '../components/ImageModal'
+import Loading from '../components/Loading'
+
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { resetEditData, getCategories, getProducts, setIsLoading } from '../store/actions/actionCreator'
+import { errorToast } from '../helpers/toast'
 
 export default function HomePage() {
   const dispatch = useDispatch()
   const location = useLocation()
-  const isModal = useSelector((state) => state.general.isModal)
-  const pathNow = location.pathname
+  const [isModal, isLoading] = useSelector((state) => [state.general?.isModal, state.general?.isLoading])
 
   useEffect(() => {
-    dispatch(setPathNow(location.pathname))
     dispatch(resetEditData())
     dispatch(getProducts())
     dispatch(getCategories())
   }, [location.pathname])
-  
+
+
+  if (isLoading) return <Loading />
 
   return (
     <>
@@ -26,21 +29,21 @@ export default function HomePage() {
         <div className="container h-full p-10" >
           <span className="text-6xl text-green-900 flex justify-between items-baseline">
             Dashboard
-             {
-              pathNow === '/category-page' 
-              ?
-              <AddButton path='/input-page/category' text='Add Category' />
-              :
-              <AddButton path="/input-page"  text='Add Product' />
-             }          
+            {
+              location.pathname === '/category-page'
+                ?
+                <AddButton path='/input-page/category' text='Add Category' />
+                :
+                <AddButton path="/input-page" text='Add Product' />
+            }
           </span>
           <br />
-          <Table pathNow={pathNow} />
+          <Table />
         </div>
       </div>
       {
         isModal ? <ImageModal /> : ''
-      }
+      },
     </>
   )
 }

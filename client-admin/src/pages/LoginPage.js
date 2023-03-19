@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { errorToast, successToast } from '../helpers/toast'
-import loginLogo from '../images/loginLogo.png'
+import loginLogo from '../assets/loginLogo.png'
 import { postLogin } from '../store/actions/actionCreator'
 
 export default function LoginPage() {
@@ -10,6 +10,7 @@ export default function LoginPage() {
   const [credential, setCredential] = useState({})
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
 
   function checkCredential(e) {
     let { value, name } = e.target
@@ -51,7 +52,7 @@ export default function LoginPage() {
             </form>
           </div>
           <div className="flex h-full w-full p-5 mr-7">
-            <img src={loginLogo} alt="" className="shadow-xl rounded-md bg-stone-400" />
+            <img src={loginLogo} alt="login-logo" className="shadow-xl rounded-md bg-stone-400" />
           </div>
         </div>
       </div>
