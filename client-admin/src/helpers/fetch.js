@@ -1,4 +1,5 @@
-const baseUrl = 'http://localhost:3000/'
+// const baseUrl = 'http://localhost:3000/'
+const baseUrl = 'https://server.mfahri.com/pub/'
 
 async function fetchPost(endpoint, dataTarget) {
     const response = await fetch(baseUrl + endpoint, {
